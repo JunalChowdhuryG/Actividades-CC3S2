@@ -1,5 +1,12 @@
 # **Actividad 1: Introduccion a DevOps**
-`Junal Chowdhury Gomez`
+
+**Presentacion:** [Presentacion de la Actividad 1](Presentacion%20Actividad%201.pdf) 
+
+**Integrantes de la Presentacion:**
+* `Chowdhury Gomez, Junal Johir`
+* `La Torre Vasquez, Andres Sebastian`
+* `Zapata Inga, Janio Adolfo`
+
 
 ## Indice
 1. [**Lectura 1**](#Lectura-1)
