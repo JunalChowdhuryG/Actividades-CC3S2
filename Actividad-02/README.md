@@ -7,8 +7,8 @@
 ### **A. Infraestructura como Codigo**
 
 > **Tarea teorica:**  
-> - Investigar una herramienta de IaC (p. ej. Terraform) y describir cómo organiza sus módulos.  
-> - Proponer la estructura de archivos y directorios para un proyecto hipotético que incluya tres módulos: `network`, `database` y `application`. Justificar la jerarquía elegida.
+> - Investigar una herramienta de IaC (p. ej. Terraform) y describir como organiza sus modulos.  
+> - Proponer la estructura de archivos y directorios para un proyecto hipotetico que incluya tres modulos: `network`, `database` y `application`. Justificar la jerarquia elegida.
 
 
 
@@ -76,8 +76,8 @@
 
 ### **B. Contenerizacion y despliegue de aplicaciones modernas**
 > **Tarea teorica:**  
-> - Describir un flujo simple de despliegue donde un desarrollador hace un cambio en el código, se construye una nueva imagen Docker y se actualiza un Deployment de Kubernetes.  
-> - Explicar las ventajas de usar Kubernetes para escalar una aplicación en un evento de alto tráfico.
+> - Describir un flujo simple de despliegue donde un desarrollador hace un cambio en el codigo, se construye una nueva imagen Docker y se actualiza un Deployment de Kubernetes.  
+> - Explicar las ventajas de usar Kubernetes para escalar una aplicacion en un evento de alto trafico.
 
 #### **1. Fuentes**
 
@@ -164,8 +164,8 @@
 
 ### **C. Observabilidad y Troubleshooting**
 > **Tarea teorica:**  
-> - Investigar y describir cómo Prometheus y Grafana se integran con Kubernetes para monitorear los contenedores y el cluster.  
-> - Proponer un set de métricas y alertas mínimas para una aplicación web (por ejemplo, latencia de peticiones, uso de CPU/memoria, tasa de errores).
+> - Investigar y describir como Prometheus y Grafana se integran con Kubernetes para monitorear los contenedores y el cluster.  
+> - Proponer un set de metricas y alertas minimas para una aplicacion web (por ejemplo, latencia de peticiones, uso de CPU/memoria, tasa de errores).
 
 #### **1. Fuentes:**
 - [IBM: Prometheus y Grafana en un cluster de Kubernetes](https://www.ibm.com/docs/en/txseries/11.1?topic=grafana-installing-prometheus-in-kubernetes-cluster)
@@ -267,7 +267,7 @@ groups:
 ### **D. CI/CD (Integracio  n continua / Despliegue continuo)**
 > **Tarea teorica:**  
 > - Explicar la diferencia entre entrega continua (continuous delivery) y despliegue continuo (continuous deployment).  
-> - Describir la relevancia de implementar pruebas automáticas (unitarias, de integración, de seguridad) dentro del pipeline.
+> - Describir la relevancia de implementar pruebas automaticas (unitarias, de integracion, de seguridad) dentro del pipeline.
 
 
 #### **1. Diferencia entre Entrega Continua (Continuous Delivery) y Despliegue Continuo (Continuous Deployment)**
@@ -301,5 +301,158 @@ groups:
     - Sin pruebas automatizadas, el riesgo de fallos en produccion aumenta.
     - En Continuous Deployment, son criticas para evitar liberar codigo defectuoso.
 * Optimizan tiempo y costos:
-    - Corregir un bug en etapas tempranas es más barato que en produccion.
+    - Corregir un bug en etapas tempranas es mas barato que en produccion.
 
+#### **3. Ejemplo de pipeline completo**
+
+
+
+##### **Encabezado del Workflow**
+```yaml
+name: CI/CD Pipeline
+```
+
+
+##### **Eventos que activan el workflow (`on`)**
+```yaml
+on:
+  push:
+    branches: [ "main", "feature/*" ]
+  pull_request:
+    branches: [ "main" ]
+```
+
+Se ejecuta cuando se hace un push en la rama `main` o cualquier rama `feature/*` y tambien se ejecutaa  cuando se hace un pull request en larama main
+
+---
+
+##### **Variables de entorno (`env`)**
+```yaml
+env:
+  DOCKER_IMAGE: "ghcr.io/usuario/proyecto"
+```
+define variable de  entorn **DOCKER_IMAGE** con la direccion en donde se subira laimagen docker
+
+---
+
+##### **1. JOB: Build**
+```yaml
+build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+        uses: actions/checkout@v3
+
+    - name: Log in to container registry
+        run: |
+        echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ghcr.io -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+    - name: Build Docker image
+        run: |
+        docker build -t $DOCKER_IMAGE:${{ github.sha }} .
+    
+    - name: Push Docker image
+        run: |
+        docker push $DOCKER_IMAGE:${{ github.sha }}
+```
+* clona el codigo de el repositorio
+* inicia sesion en el GitHub Container Registry 
+* construye la imagen Docker con el codigo actual
+* sube la imaggen al registry con un tag basado en el commit SHA
+
+
+##### **2. JOB: Test**
+
+```yaml
+test:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Log in to container registry
+        run: |
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ghcr.io -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+      - name: Pull Docker image
+        run: |
+          docker pull $DOCKER_IMAGE:${{ github.sha }}
+
+      - name: Run tests
+        run: |
+          # Ejemplo: correr pruebas dentro del contenedor
+          # Se asume que run_unit_tests.sh y run_integration_tests.sh existen en el repo
+          docker run --rm $DOCKER_IMAGE:${{ github.sha }} ./run_unit_tests.sh
+          docker run --rm $DOCKER_IMAGE:${{ github.sha }} ./run_integration_tests.sh
+```
+
+* descarga la imagen Docker creada en el paso anterior
+* eejecuta pruebas unitarias y de integracion dentro de contenedores Docker
+* este job depende del job `build`
+
+##### **3. JOB: Seguridad**
+
+```yaml
+security:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+        - name: Log in to container registry
+        run: |
+            echo "${{ secrets.DOCKER_PASSWORD }}" | docker login ghcr.io -u ${{ secrets.DOCKER_USER }} --password-stdin
+
+        - name: Pull Docker image
+        run: |
+            docker pull $DOCKER_IMAGE:${{ github.sha }}
+
+        - name: Docker Scan
+        run: |
+            # Como alternativa, se puede usar Snyk o trivy
+            # Ejemplo: Docker scan nativo
+            docker scan $DOCKER_IMAGE:${{ github.sha }} --severity high
+```
+* descarga la imagen Docker creada en build
+* escanea la imagen en busca de vulnerabilidades criticas o de alta severidad usando docker scan
+* este job depende del job `build`
+
+
+##### **4. JOB: Deploy**
+```yaml
+deploy:
+    runs-on: ubuntu-latest
+    needs: [test, security]
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v3
+
+      - name: Set up kubectl
+        uses: azure/setup-kubectl@v3
+        with:
+          version: 'latest'
+      
+      - name: Configure Kube Credentials
+        # Se asume que en el secret KUBE_CONFIG esta guardado el contenido del archivo ~/.kube/config
+        run: |
+          mkdir -p ~/.kube
+          echo "${{ secrets.KUBE_CONFIG }}" > ~/.kube/config
+
+      - name: Update Kubernetes Deployment
+        run: |
+          kubectl set image deployment/proyecto-deployment \
+            proyecto-container=$DOCKER_IMAGE:${{ github.sha }}
+          kubectl rollout status deployment/proyecto-deployment
+```
+* configura kubecctl para conectarse al cluster de Kubernetes
+* actualiza el deployment para usar la nueva imagen
+* verifica que el despliegue se haya realizado correctamente
+* este job depende de los jobs `security` y `test`
+
+
+#### **4. Evaluacion y discusion final**
+
+##### **1. Evaluacion de la teoria**
+
+##### **2. Discusion en grupo**
+
+##### **3. Trabajo colaborativo**
