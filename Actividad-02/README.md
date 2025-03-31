@@ -303,17 +303,17 @@ groups:
 * Optimizan tiempo y costos:
     - Corregir un bug en etapas tempranas es mas barato que en produccion.
 
-#### **3. Ejemplo de pipeline completo**
+## **3. Ejemplo de pipeline completo**
 
 
 
-##### **Encabezado del Workflow**
+### **Encabezado del Workflow**
 ```yaml
 name: CI/CD Pipeline
 ```
 
 
-##### **Eventos que activan el workflow (`on`)**
+### **Eventos que activan el workflow (`on`)**
 ```yaml
 on:
   push:
@@ -326,7 +326,7 @@ Se ejecuta cuando se hace un push en la rama `main` o cualquier rama `feature/*`
 
 ---
 
-##### **Variables de entorno (`env`)**
+### **Variables de entorno (`env`)**
 ```yaml
 env:
   DOCKER_IMAGE: "ghcr.io/usuario/proyecto"
@@ -335,7 +335,7 @@ define variable de  entorn **DOCKER_IMAGE** con la direccion en donde se subira 
 
 ---
 
-##### **1. JOB: Build**
+### **1. JOB: Build**
 ```yaml
 build:
     runs-on: ubuntu-latest
@@ -361,7 +361,7 @@ build:
 * sube la imaggen al registry con un tag basado en el commit SHA
 
 
-##### **2. JOB: Test**
+### **2. JOB: Test**
 
 ```yaml
 test:
@@ -391,7 +391,7 @@ test:
 * eejecuta pruebas unitarias y de integracion dentro de contenedores Docker
 * este job depende del job `build`
 
-##### **3. JOB: Seguridad**
+### **3. JOB: Seguridad**
 
 ```yaml
 security:
@@ -417,7 +417,7 @@ security:
 * este job depende del job `build`
 
 
-##### **4. JOB: Deploy**
+### **4. JOB: Deploy**
 ```yaml
 deploy:
     runs-on: ubuntu-latest
@@ -449,10 +449,131 @@ deploy:
 * este job depende de los jobs `security` y `test`
 
 
-#### **4. Evaluacion y discusion final**
+## **4. Evaluacion y discusion final**
 
-##### **1. Evaluacion de la teoria**
+### **1. Evaluacion de la teoria**
+* El informe esta en [Informe](Informe.md)
+### **2. Discusion en grupo**
+* Fuentes:
+    * [Case Study: How Netflix became a master of DevOps?](https://medium.com/%40maeydhaw/case-study-how-netflix-became-a-master-of-devops-7f6f6fa8ad86)
+    * [Uber: Observability at Scale: Building Uber’s Alerting Ecosystem](https://www.uber.com/en-PE/blog/observability-at-scale/)
+    * [Caso Uber: Retos en la Transición a Microservicios](https://prezi.com/p/sbmlwbuimwzp/caso-uber-retos-en-la-transicion-a-microservicios/)
+    * [Medium: Spotify CI migration](https://medium.com/%40dmosyan/spotify-ci-migration-to-achieve-4-x-faster-pipelines-cd8835685982)
+    * [How DevOps Reduces Time to Market?](https://cloud.folio3.com/blog/devops-time-to-market/)
 
-##### **2. Discusion en grupo**
 
-##### **3. Trabajo colaborativo**
+#### Debatir cómo la adopción de estas prácticas puede acelerar el “time to market” de un producto
+En base a la fuente: [Cloud Folio3: How DevOps Reduces Time to Market?](https://cloud.folio3.com/blog/devops-time-to-market/)
+
+
+##### **1. Automatización y Eliminación de Tareas Manuales**  
+- **antes** La infraestructura se configuraba manualmente lo que podía tomar semanas o meses
+- **ahora** Con **IaC en el curso utilizaremos Terraform** , la infraestructura se provisiona automáticamente en minutos  
+- **Impacto** menos errores humanos y tiempos de despliegue más cortos 
+
+##### **2. Desarrollo y Pruebas Continuas**  
+- **antes:** las pruebas eran manuales y los equipos liberaban software cada varios meses.  
+- **ahora:** Con **CI/CD en el curso utilizaremos GitHub Actions**, los cambios pasan automáticamente por pruebas y se despliegan sin intervención manual.  
+- **impacto:** Se pueden liberar nuevas versiones en cuestión de horas o días, en lugar de semanas o meses.  
+
+##### **3. Entornos Uniformes y Portabilidad**  
+- **antes:** Había problemas de compatibilidad entre entornos de desarrollo, prueba y producción.  
+- **ahora:** Los **contenedores con Docker** garantizan que el software funcione igual en todos los entornos.  
+- **impacto:** Se reducen fallos inesperados en producción, acelerando el lanzamiento de nuevas funcionalidades.  
+
+##### **4. Escalabilidad Dinámica y Mantenimiento Cero-Downtime**  
+- **aantes:** Si una aplicación tenía mucho tráfico, requería intervención manual para escalar servidores.  
+- **ahora** con **Kubernetes en el curso**, las aplicaciones escalan automáticamente según la demanda.  
+- **impacto** Mejor experiencia del usuario y menos interrupciones en la disponibilidad del producto.  
+
+##### **5. Observabilidad y Monitoreo en Tiempo Real**  
+- **antes:** Se detectaban problemas solo cuando los usuarios los reportaban 
+- **ahora:** con herramientas de **observabilidad con Prometheus, Grafana segun el curso**, los equipos identifican anomalías antes de que afecten al usuario final
+- **impacto:** Menos tiempo dedicado a solucionar errores en producción y mayor confianza en los lanzamientos 
+
+
+#### **Ejemplos Reales de Empresas que Usan Estas Prácticas**  
+
+
+##### **1. Netflix - Escalabilidad y Despliegue Continuo**  
+- **Problem:** Netflix necesita manejar picos de tráfico masivos (millones de usuarios viendo contenido a la vez)
+- **solución:** Usa **kubernetes para escalar automáticamente** sus microservicios y **CI/CD para desplegar nuevas funciones varias veces al día**  
+- **impacto:** Reducción en el tiempo de inactividad y mejoras constantes en la plataforma sin interrumpir el servicio 
+
+##### **2. Uber - Monitoreo y Observabilidad**  
+- **problema:** Uber procesa millones de solicitudes de viajes en tiempo real y necesita detectar problemas de latencia rápidamente 
+- **Solución:** Usa **observabilidad con Prometheus y Grafana** para monitorear métricas en tiempo real y detectar cuellos de botell  
+- **impacto:** Mejora la experiencia del usuario reduciendo tiempos de respuesta y detectando fallos antes de que impacten el servicio 
+
+##### **3. Spotify - Entrega Continua con CI/CD**  
+- **Problema:** Spotify libera nuevas funciones frecuentemente y necesita evitar interrrupciones del servicio  
+- **Solución:** Implementó **pipelines de CI/CD y kubernete** para probar y desplegar cambios de manera segura y rápida 
+- **impacto:** Spotify puede liberar nuevas versiones sin afectar a los usuarios y sin tiempos de inactividad  
+
+
+
+### **3. Trabajo colaborativo**
+
+#### **Flujo del proceso**
+1. Commit del código
+    - Un desarrollador hace un push de código a un repositorio en GitHub
+
+2. Ejecución del pipeline CI/CD
+    - Un sistema como GitHub Actions detecta el cambio y dispara el pipeline.
+    - Se ejecutan pruebas unitarias y de integración.
+
+3. Infraestructura como Código (IaC) - Terraform
+    - Si es necesario, se provisionan recursos en la nube (AWS, GCP, Azure) usando Terraform.
+    - Se crean VPCs, clústeres de Kubernetes (EKS/AKS/GKE) y almacenamiento.
+
+4. Construcción y almacenamiento de la imagen de contenedor
+    - Se genera una imagen Docker con la aplicación y se envía a un registro de contenedores (Docker Hub).
+
+5. Despliegue en Kubernetes
+    - Kubernetes toma la imagen y la ejecuta en un clúster mediante un Deployment.
+    - Se usa un Service para exponer la aplicación y un Ingress para manejar el tráfico HTTP.
+
+6. Monitoreo y observabilidad con Prometheus/Grafana
+    - Prometheus recolecta métricas de los pods y del sistema.
+    - Grafana visualiza estas métricas en paneles en tiempo real.
+    - Se configuran alertas para detectar fallos automáticamente.
+
+#### **Diagrama**
+
+![Imagen](img/Diapositiva1.SVG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
