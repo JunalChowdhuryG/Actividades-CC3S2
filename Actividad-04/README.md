@@ -34,3 +34,104 @@ El uso de ramas en Git aporta multiples beneficios cuando se trabaja en el desar
 - **Flexibilidad para Descartar Cambios**: Si una nueva funcionalidad o correccion no funciona como se esperaba, se puede eliminar la rama sin afectar el codigo base. Esto proporciona una gran seguridad y flexibilidad en el desarrollo  
 
 - **Despliegues Independientes**: En proyectos con lanzamientos frecuentes, las ramas permiten preparar y probar versiones especificas de forma independiente. Una vez que una funcion esta lista, puede fusionarse y desplegarse sin depender de otros cambios en desarrollo
+
+## **Ejercicios**
+
+### **Ejercicio 1: Manejo avanzado de ramas y resolución de conflictos**
+
+Primero configo git con mis credenciales
+    ![Configuracion](img/git-config.png)
+
+Para mi caso, yo manejo 2 cuentas github en mi laptop a travez de claves ssh, para este repositorio estare manejando la cuenta:
+
+```bash
+file:C:/Users/Junal/.gitconfig  user.email=chowdhurygomezjunaljohir@gmail.com
+file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
+```
+
+1. **Crear una nueva rama para una característica:**
+
+    - Crea una nueva rama llamada feature/advanced-feature desde la rama main:
+
+    ```git
+    git branch feature/advanced-feature
+    git checkout feature/advanced-feature       
+    ```
+    ![rama-feature/advanced-feature](img/git-branch-feature-advanced.png)
+
+
+2. **Modificar archivos en la nueva rama:**
+
+    - Edita el archivo main.py para incluir una función adicional:
+
+        El código agregado nos permite imprimer el mensaje `Hello from advanced feature` mediante la funcion **greet**
+
+        ![](img/touch-nano-mainPY.png)
+
+    - Añadimos y confirmamos estos cambios en la rama feature/advanced-feature:
+
+        ```git
+        git add main.py
+        git commit -m "Add greet function in advanced feature"     
+        ```
+
+        ![](img/git-commit-advanced-mainPY.png)
+
+3. **Simular un desarrollo paralelo en la rama main:**
+
+    - Cambia de nuevo a la rama main:
+
+        ```git
+        git checkout main  
+        ```
+    - Añade y confirma estos cambios en la rama main:
+
+        ```git
+        git add main.py
+        git commit -m "Update main.py message in main branch"
+        ```
+    
+    ![](img/git-commit-main-mainPY.png)
+
+4. **Intentamos fusionar la rama feature/advanced-feature en main:**
+
+    - Fusiona la rama feature/advanced-feature en main:
+        ```git
+        git merge feature/advanced-feature
+        ```
+    Observamos que surgio un conflicto al momento de hacer un merge.
+
+    ![](img/git-conflict-1.png)
+
+    Observamos que los prints creadas en el archivo python en las diferentes ramas se unen. 
+
+    ![](img/codigo-conflicto.png)
+
+5. **Resolver el conflicto de fusión:**
+
+    - Git generará un conflicto en main.py. Abre el archivo y resuelve el conflicto manualmente,
+    eligiendo cómo combinar las dos versiones.
+
+    - Después de resolver el conflicto, añade el archivo resuelto y completa la fusión:
+
+        ```git
+        git add main.py
+        git commit -m "Resolve merge conflict between main and feature/advanced-feature"
+        ```
+    ![](img/git-merge-1.png)
+
+6. **Eliminar la rama fusionada:**
+    - Una vez que hayas fusionado con éxito y resuelto los conflictos, elimina la rama
+    feature/advanced-feature:
+
+        ```git
+        git branch -d feature/advanced-feature
+        ```
+
+    ![](img/git-delete-branch.png)
+
+
+
+
+
+
