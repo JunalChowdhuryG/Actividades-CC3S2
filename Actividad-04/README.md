@@ -130,8 +130,64 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
 
     ![](img/E1-git-delete-branch.png)
 
+### **Ejercicio 2: Exploración y manipulación del historial de commits**
 
 
 
+1. **Ver el historial detallado de commits:**
+   - Usa el comando `git log` para explorar el historial de commits, pero esta vez con más detalle:
+
+     ```bash
+     $ git log -p
+     ```
+    ![](img/E2-git-log-p.png)
+    - Podemos parte del historial de commits
 
 
+2. **Filtrar commits por autor:**
+   - Usa el siguiente comando para mostrar solo los commits realizados por un autor específico:
+
+     ```bash
+     $ git log --author="TuNombre"
+     ```
+     ![](img/E2-git-log-author.png)
+    - Podemoss ver els historial del author=`JunalChowdhuryG`
+
+3. **Revertir un commit:**
+   - Imagina que el commit más reciente en `main.py` no debería haberse hecho. Usa `git revert` para revertir ese commit:
+
+     ```bash
+     $ git revert HEAD
+     ```
+   ![](img/E2-git-revert-head.png)
+   - Revertimos la ultima modificacion del `main.py`
+
+4. **Rebase interactivo:**
+   - Realiza un rebase interactivo para combinar varios commits en uno solo. Esto es útil para limpiar el historial de commits antes de una fusión.
+   - Usa el siguiente comando para empezar el rebase interactivo:
+
+     ```bash
+     $ git rebase -i HEAD~3
+     ```
+    - El comaando anterior abre en el editor:
+    ![](img/E2-git-revert-3-editor.png)
+
+    - Cambiamos los terminos  `pick` a `squach`
+    ![](img/E2-git-revert-3-squash.png)
+
+    - Vemos los cambios hechoss
+    ![](img/E2-git-revert-3-terminal.png)
+
+
+5. **Visualización gráfica del historial:**
+   - Usa el siguiente comando para ver una representación gráfica del historial de commits:
+
+     ```bash
+     $ git log --graph --oneline --all
+     ```
+    - visualizamos el git logs
+   ![](img/E2-git-log%20-graph.png)
+   - otra manera de visualizar es con el comando `gitk --all`
+   ![](img/E2-gitk-all.png)
+
+### **Ejercicio 3: Creación y gestión de ramas desde commits específicos**
