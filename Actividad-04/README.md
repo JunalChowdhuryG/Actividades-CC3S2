@@ -57,7 +57,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
     git branch feature/advanced-feature
     git checkout feature/advanced-feature       
     ```
-    ![rama-feature/advanced-feature](img/git-branch-feature-advanced.png)
+    ![](img/E1-git-branch-feature-advanced.png)
 
 
 2. **Modificar archivos en la nueva rama:**
@@ -66,7 +66,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
 
         El código agregado nos permite imprimer el mensaje `Hello from advanced feature` mediante la funcion **greet**
 
-        ![](img/touch-nano-mainPY.png)
+        ![](img/E1-touch-nano-mainPY.png)
 
     - Añadimos y confirmamos estos cambios en la rama feature/advanced-feature:
 
@@ -75,7 +75,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git commit -m "Add greet function in advanced feature"     
         ```
 
-        ![](img/git-commit-advanced-mainPY.png)
+        ![](img/E1-git-commit-advanced-mainPY.png)
 
 3. **Simular un desarrollo paralelo en la rama main:**
 
@@ -91,7 +91,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git commit -m "Update main.py message in main branch"
         ```
     
-    ![](img/git-commit-main-mainPY.png)
+    ![](img/E1-git-commit-main-mainPY.png)
 
 4. **Intentamos fusionar la rama feature/advanced-feature en main:**
 
@@ -101,11 +101,11 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         ```
     Observamos que surgio un conflicto al momento de hacer un merge.
 
-    ![](img/git-conflict-1.png)
+    ![](img/E1-git-conflict-1.png)
 
     Observamos que los prints creadas en el archivo python en las diferentes ramas se unen. 
 
-    ![](img/codigo-conflicto.png)
+    ![](img/E1-codigo-conflicto.png)
 
 5. **Resolver el conflicto de fusión:**
 
@@ -118,7 +118,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git add main.py
         git commit -m "Resolve merge conflict between main and feature/advanced-feature"
         ```
-    ![](img/git-merge-1.png)
+    ![](img/E1-git-merge-1.png)
 
 6. **Eliminar la rama fusionada:**
     - Una vez que hayas fusionado con éxito y resuelto los conflictos, elimina la rama
@@ -128,7 +128,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git branch -d feature/advanced-feature
         ```
 
-    ![](img/git-delete-branch.png)
+    ![](img/E1-git-delete-branch.png)
 
 
 
