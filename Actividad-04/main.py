@@ -1,6 +1,4 @@
 def greet():
-    print('Hello World - updated in main')
-
-    print('Hello from advanced feature')
-
+    print('Commit 0')
+    print('Hello World Original version 1.0')
 greet()
