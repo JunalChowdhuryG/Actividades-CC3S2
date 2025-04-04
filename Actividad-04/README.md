@@ -253,3 +253,53 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
     ![](img/E3-delete-branch.png)
 
 ### **Ejercicio 4: Manipulación y restauración de commits con git reset y git restore**
+1. **Hacer cambios en el archivo main.py:**
+   - Edita el archivo `main.py` para introducir un nuevo cambio:
+     ```python
+     print('This change will be reset')
+     ```
+     ![](img/E4-git-echo-main.png)
+   - Añade y confirma los cambios:
+
+     ```bash
+     $ git add main.py
+     $ git commit -m "Introduce a change to be reset"
+     ```
+     ![](/img/E4-git-commit-change-reset.png)
+
+
+
+2. **Usar git reset para deshacer el commit:**
+   - Deshaz el commit utilizando `git reset` para volver al estado anterior:
+
+     ```bash
+     $ git reset --hard HEAD~1
+     ```
+   - Verifica que el commit ha sido eliminado del historial y que el archivo ha vuelto a su estado anterior.
+   ![](/img/E4-git-reset-head.png)
+
+   - Podemos observar que se ha eliminado el commit, comparando el `git status` antes y despues del `git reset --hard HEAD~1`
+
+3. **Usar git restore para deshacer cambios no confirmados:**
+   - Realiza un cambio en `README.md` y no lo confirmes:
+   - En mi caso hare la modificacion en el `ANNOTATION.md`
+
+     ```bash
+     $ echo "Another line in ANNOTATION" >> ANNOTATION.md
+     $ git status
+     ```
+    ![](/img/E4-echo-annotation.png)
+
+   - Usa `git restore` para deshacer este cambio no confirmado:
+
+     ```bash
+     $ git restore README.md
+     ```
+   - Verifica que el cambio no confirmado ha sido revertido.
+
+    ![](/img/E4-git-restore.png)
+
+    - Podemos observar que despues de `git restore` el archivo `ANNOTATION.md` no contiene el mensaje "Another line in ANNOTATION", y el archivo `main.py` no contiene la ultima modificacion 
+    ```python
+     print('This change will be reset')
+     ```
