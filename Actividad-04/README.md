@@ -201,7 +201,6 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      ```
 
     ![](/img/E3-git-log-oneline.png)
-
     - Tomaremos el commit con hash: `03c7016`
 
    - Crea una nueva rama `bugfix/rollback-feature` desde ese commit:
