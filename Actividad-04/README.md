@@ -191,3 +191,66 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
    ![](img/E2-gitk-all.png)
 
 ### **Ejercicio 3: Creación y gestión de ramas desde commits específicos**
+
+
+1. **Crear una nueva rama desde un commit específico:**
+   - Usa el historial de commits (`git log --oneline`) para identificar un commit antiguo desde el cual crear una nueva rama:
+
+     ```bash
+     $ git log --oneline
+     ```
+
+    ![](/img/E3-git-log-oneline.png)
+
+    - Tomaremos el commit con hash: `03c7016`
+
+   - Crea una nueva rama `bugfix/rollback-feature` desde ese commit:
+
+     ```bash
+     $ git branch bugfix/rollback-feature 03c7016
+     $ git checkout bugfix/rollback-feature
+     ```
+    ![](/img/E3-git-branch-bugfix-rollback.png)
+
+
+2. **Modificar y confirmar cambios en la nueva rama:**
+   - Realiza algunas modificaciones en `main.py` que simulen una corrección de errores:
+     ```python
+     def greet():
+         print('Fixed bug in feature')
+     ```
+   - Añade y confirma los cambios en la nueva rama:
+
+     ```bash
+     $ git add main.py
+     $ git commit -m "Fix bug in rollback feature"
+     ```
+     
+3. **Fusionar los cambios en la rama principal:**
+   - Cambia de nuevo a la rama `main` y fusiona la rama `bugfix/rollback-feature`:
+
+     ```bash
+     $ git checkout main
+     $ git merge bugfix/rollback-feature
+     ```
+    ![](img/E3-git-merge.png)
+
+
+4. **Explorar el historial después de la fusión:**
+   - Usa `git log` y `git log --graph` para ver cómo se ha integrado el commit en el historial:
+
+     ```bash
+     $ git log --graph --oneline
+     ```
+     ![](img/E3-git-log-oneline.png)
+
+
+5. **Eliminar la rama bugfix/rollback-feature:**
+   - Una vez fusionados los cambios, elimina la rama `bugfix/rollback-feature`:
+
+     ```bash
+     $ git branch -d bugfix/rollback-feature
+     ```
+    ![](img/E3-delete-branch.png)
+
+### **Ejercicio 4: Manipulación y restauración de commits con git reset y git restore**
