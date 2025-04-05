@@ -65,7 +65,6 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
     - Edita el archivo main.py para incluir una función adicional:
 
         El código agregado nos permite imprimer el mensaje `Hello from advanced feature` mediante la funcion **greet**
-
         ![](img/E1-touch-nano-mainPY.png)
 
     - Añadimos y confirmamos estos cambios en la rama feature/advanced-feature:
@@ -74,7 +73,6 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git add main.py
         git commit -m "Add greet function in advanced feature"     
         ```
-
         ![](img/E1-git-commit-advanced-mainPY.png)
 
 3. **Simular un desarrollo paralelo en la rama main:**
@@ -90,7 +88,6 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
         git add main.py
         git commit -m "Update main.py message in main branch"
         ```
-    
     ![](img/E1-git-commit-main-mainPY.png)
 
 4. **Intentamos fusionar la rama feature/advanced-feature en main:**
@@ -131,8 +128,6 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
     ![](img/E1-git-delete-branch.png)
 
 ### **Ejercicio 2: Exploración y manipulación del historial de commits**
-
-
 
 1. **Ver el historial detallado de commits:**
    - Usa el comando `git log` para explorar el historial de commits, pero esta vez con más detalle:
@@ -192,14 +187,11 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
 
 ### **Ejercicio 3: Creación y gestión de ramas desde commits específicos**
 
-
 1. **Crear una nueva rama desde un commit específico:**
    - Usa el historial de commits (`git log --oneline`) para identificar un commit antiguo desde el cual crear una nueva rama:
-
      ```bash
      $ git log --oneline
      ```
-
     ![](/img/E3-git-log-oneline.png)
     - Tomaremos el commit con hash: `03c7016`
 
@@ -296,10 +288,52 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ git restore README.md
      ```
    - Verifica que el cambio no confirmado ha sido revertido.
-
     ![](/img/E4-git-restore.png)
 
     - Podemos observar que despues de `git restore` el archivo `ANNOTATION.md` no contiene el mensaje "Another line in ANNOTATION", y el archivo `main.py` no contiene la ultima modificacion 
     ```python
      print('This change will be reset')
      ```
+
+### **Ejercicio 5: Trabajo colaborativo y manejo de Pull Requests**
+- Como mencione anteriormente, manejo 2 cuentas de github las cuales utilizare para hacer el Pull Request desde una cuenta a otra:
+
+  - [JunalChowdhuryG (Principal): Actividades-CC3S2](https://github.com/JunalChowdhuryG/Actividades-CC3S2)  
+  - [JunalChowdhuryGomez (Secundaria): Fork-Segunda-Cuenta-Actividades-CC3S2](https://github.com/JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2)
+
+- Repositorio de la cuenta **Principal** vista desde la cuenta **Secundaria**.
+![](/img/E5-repositorio-visto-otra-cuenta.png)
+
+- Haciendo Fork del repositoria de la cuenta **Principal** en la cuenta **Secundaria**, el repositorio es: [JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2](https://github.com/JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2)
+![](/img/E5-Fork-segunda-cuenta.png)
+
+- Creo el archivo `collaboration.py` en la rama `feature/team-feature`  en el repositorio de la cuenta **Secundaria**
+![](/img/E5-creacion-archivo-rama-feature-team-feature.png)
+
+- Procedemos hacer el commit desde la segunda cuenta
+![](/img/E5-commit-segunda-cuenta.png)
+
+- Preparamos el pull request desde la segunda cuenta
+
+![](/img/E5-preparando-pull-request-segunda-cuenta.png)
+
+- Añadimos el mensaje al pull request 
+![](/img/E5-pull-request-segunda-cuenta.png)
+
+- Confirmamos el envio del pull request desde la segunda cuenta
+![](/img/E5-confirmacion-pull-request-segunda-cuenta.png)
+
+- En la cuenta **principal** verificamos el pull request
+![](/img/E5-pull-request-cuenta-principal.png)
+
+- Revisamos el pull request 
+![](/img/E5-revision-pull-request.png)
+
+- Aceptamos el pull request desde la cuenta **Principal**
+![](/img/E5-aceptando-pull-request-segunda-cuenta.png)
+
+- Fusionamos a la rama main
+![](/img/E5-merge-a-main-cuenta-principal.png)
+
+- Verificamos que se fuciono la rama correctament, ademas podemo ver la contribucion de la segunda cuenta de github
+![](/img/E5-verificacion-colaboracion.png)
