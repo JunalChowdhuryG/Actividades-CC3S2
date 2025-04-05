@@ -337,3 +337,26 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
 
 - Verificamos que se fuciono la rama correctament, ademas podemo ver la contribucion de la segunda cuenta de github
 ![](/img/E5-verificacion-colaboracion.png)
+
+### **Ejercicio 6: Cherry-Picking y Git Stash**
+
+- Hacer cambios en main.py y confirmarlos:
+![](/img/E6-git-commit-main.png)
+
+- Crear una nueva rama
+![](img/E6-git-branch.png)
+
+- Vemos el hash el historial
+![](img/E6-git-log-oneline.png)
+
+- Aplicamos `cherry-pick` con el hash `3727ae7`
+![](/img/E6-git-cherry-pick.png)
+
+- Modificacmos el `main.py` y hacemos `git stash`
+![](/img/E6-modificacion-main.png)
+
+- Recuperamos los cambios guardados
+![](/img/E6-git-stach-pop.png)
+
+- Verificamos con el `git log`
+![](/img/E6-git-log.png)
