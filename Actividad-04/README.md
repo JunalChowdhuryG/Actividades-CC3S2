@@ -192,7 +192,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      ```bash
      $ git log --oneline
      ```
-    ![](/img/E3-git-log-oneline.png)
+    ![](img/E3-git-log-oneline.png)
     - Tomaremos el commit con hash: `03c7016`
 
    - Crea una nueva rama `bugfix/rollback-feature` desde ese commit:
@@ -201,7 +201,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ git branch bugfix/rollback-feature 03c7016
      $ git checkout bugfix/rollback-feature
      ```
-    ![](/img/E3-git-branch-bugfix-rollback.png)
+    ![](img/E3-git-branch-bugfix-rollback.png)
 
 
 2. **Modificar y confirmar cambios en la nueva rama:**
@@ -257,7 +257,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ git add main.py
      $ git commit -m "Introduce a change to be reset"
      ```
-     ![](/img/E4-git-commit-change-reset.png)
+     ![](img/E4-git-commit-change-reset.png)
 
 
 
@@ -268,7 +268,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ git reset --hard HEAD~1
      ```
    - Verifica que el commit ha sido eliminado del historial y que el archivo ha vuelto a su estado anterior.
-   ![](/img/E4-git-reset-head.png)
+   ![](img/E4-git-reset-head.png)
 
    - Podemos observar que se ha eliminado el commit, comparando el `git status` antes y despues del `git reset --hard HEAD~1`
 
@@ -280,7 +280,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ echo "Another line in ANNOTATION" >> ANNOTATION.md
      $ git status
      ```
-    ![](/img/E4-echo-annotation.png)
+    ![](img/E4-echo-annotation.png)
 
    - Usa `git restore` para deshacer este cambio no confirmado:
 
@@ -288,7 +288,7 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
      $ git restore README.md
      ```
    - Verifica que el cambio no confirmado ha sido revertido.
-    ![](/img/E4-git-restore.png)
+    ![](img/E4-git-restore.png)
 
     - Podemos observar que despues de `git restore` el archivo `ANNOTATION.md` no contiene el mensaje "Another line in ANNOTATION", y el archivo `main.py` no contiene la ultima modificacion 
     ```python
@@ -302,46 +302,46 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
   - [JunalChowdhuryGomez (Secundaria): Fork-Segunda-Cuenta-Actividades-CC3S2](https://github.com/JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2)
 
 - Repositorio de la cuenta **Principal** vista desde la cuenta **Secundaria**.
-![](/img/E5-repositorio-visto-otra-cuenta.png)
+![](img/E5-repositorio-visto-otra-cuenta.png)
 
 - Haciendo Fork del repositoria de la cuenta **Principal** en la cuenta **Secundaria**, el repositorio es: [JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2](https://github.com/JunalChowdhuryGomez/Fork-Segunda-Cuenta-Actividades-CC3S2)
-![](/img/E5-Fork-segunda-cuenta.png)
+![](img/E5-Fork-segunda-cuenta.png)
 
 - Creo el archivo `collaboration.py` en la rama `feature/team-feature`  en el repositorio de la cuenta **Secundaria**
-![](/img/E5-creacion-archivo-rama-feature-team-feature.png)
+![](img/E5-creacion-archivo-rama-feature-team-feature.png)
 
 - Procedemos hacer el commit desde la segunda cuenta
-![](/img/E5-commit-segunda-cuenta.png)
+![](img/E5-commit-segunda-cuenta.png)
 
 - Preparamos el pull request desde la segunda cuenta
 
-![](/img/E5-preparando-pull-request-segunda-cuenta.png)
+![](img/E5-preparando-pull-request-segunda-cuenta.png)
 
 - Añadimos el mensaje al pull request 
-![](/img/E5-pull-request-segunda-cuenta.png)
+![](img/E5-pull-request-segunda-cuenta.png)
 
 - Confirmamos el envio del pull request desde la segunda cuenta
-![](/img/E5-confirmacion-pull-request-segunda-cuenta.png)
+![](img/E5-confirmacion-pull-request-segunda-cuenta.png)
 
 - En la cuenta **principal** verificamos el pull request
-![](/img/E5-pull-request-cuenta-principal.png)
+![](img/E5-pull-request-cuenta-principal.png)
 
 - Revisamos el pull request 
-![](/img/E5-revision-pull-request.png)
+![](img/E5-revision-pull-request.png)
 
 - Aceptamos el pull request desde la cuenta **Principal**
-![](/img/E5-aceptando-pull-request-segunda-cuenta.png)
+![](img/E5-aceptando-pull-request-segunda-cuenta.png)
 
 - Fusionamos a la rama main
-![](/img/E5-merge-a-main-cuenta-principal.png)
+![](img/E5-merge-a-main-cuenta-principal.png)
 
 - Verificamos que se fuciono la rama correctament, ademas podemo ver la contribucion de la segunda cuenta de github
-![](/img/E5-verificacion-colaboracion.png)
+![](img/E5-verificacion-colaboracion.png)
 
 ### **Ejercicio 6: Cherry-Picking y Git Stash**
 
 - Hacer cambios en main.py y confirmarlos:
-![](/img/E6-git-commit-main.png)
+![](img/E6-git-commit-main.png)
 
 - Crear una nueva rama
 ![](img/E6-git-branch.png)
@@ -350,13 +350,13 @@ file:C:/Users/Junal/.gitconfig  user.name=JunalChowdhuryG
 ![](img/E6-git-log-oneline.png)
 
 - Aplicamos `cherry-pick` con el hash `3727ae7`
-![](/img/E6-git-cherry-pick.png)
+![](img/E6-git-cherry-pick.png)
 
 - Modificacmos el `main.py` y hacemos `git stash`
-![](/img/E6-modificacion-main.png)
+![](img/E6-modificacion-main.png)
 
 - Recuperamos los cambios guardados
-![](/img/E6-git-stach-pop.png)
+![](img/E6-git-stach-pop.png)
 
 - Verificamos con el `git log`
-![](/img/E6-git-log.png)
+![](img/E6-git-log.png)
