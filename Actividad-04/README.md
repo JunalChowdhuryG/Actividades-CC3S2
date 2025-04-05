@@ -50,7 +50,7 @@ El uso de ramas en Git aporta multiples beneficios cuando se trabaja en el desar
 ### **Ejercicio 1: Manejo avanzado de ramas y resolución de conflictos**
 
 Primero configo git con mis credenciales
-    ![Configuracion](img/git-config.png)
+    ![Configuracion](img/E1-git-config.png)
 
 Para mi caso, yo manejo 2 cuentas github en mi laptop a travez de claves ssh, para este repositorio estare manejando la cuenta:
 
