@@ -1,3 +1,3 @@
 def greet():
-    print()
+    print('Cherry pick this!')
 greet()
