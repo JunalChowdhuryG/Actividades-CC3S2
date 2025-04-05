@@ -35,6 +35,16 @@ El uso de ramas en Git aporta multiples beneficios cuando se trabaja en el desar
 
 - **Despliegues Independientes**: En proyectos con lanzamientos frecuentes, las ramas permiten preparar y probar versiones especificas de forma independiente. Una vez que una funcion esta lista, puede fusionarse y desplegarse sin depender de otros cambios en desarrollo
 
+### **Realiza una revisión final del historial de commits para asegurarte de que todos los cambios se han registrado correctamente.**
+### **Revisa el uso de ramas y merges para ver cómo Git maneja múltiples líneas de desarrollo.**
+- Ya habiendo terminado la Actividad 4, procederemos a revisar el historial de commits
+- Aplicando el comando `git log --oneline --graph --all`
+![](img/log-final.png)
+- A lo largo de la actividad podemos apreciar el uso de ramas, el cual permite flexibilidad en el desarrollo, ya sea para hacer despliegues independientes, lo cual permite preparar y probar versiones especificas de forma independiente, una vez que una funcion esta lista, puede fusionarse sin afectar a las demas.
+
+
+
+
 ## **Ejercicios**
 
 ### **Ejercicio 1: Manejo avanzado de ramas y resolución de conflictos**
