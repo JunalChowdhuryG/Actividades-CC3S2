@@ -1,6 +1,8 @@
 # **Actividad 2:  Del codigo a la produccion: Infraestructura, contenedores, despliegue y observabilidad**
 
 `Junal Chowdhury Gomez`
+## **Presentacion de la Actividad 2**
+[Presentacion Actividad 2](Actividad%202%20Presentacion.pdf)
 
 ## **Descripcion de la actividad**
 
