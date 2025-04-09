@@ -9,3 +9,4 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
 * [Actividad 3: Computación en la nube](/Actividad-03/README.md)
 * [Actividad 4: Introduccion a Git - conceptos basicos y operaciones esenciales](/Actividad-04/README.md)
 * [Actividad 5: Explorando diferentes formas de fusionar en Git](/Actividad-05/README.md)
+* [Actividad 6: Rebase, Cherry-Pick y CI/CD en un entorno ágil](/Actividad-06/README.md)
