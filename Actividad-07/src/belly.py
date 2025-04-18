@@ -5,7 +5,7 @@ class Belly:
         self.pepinos_comidos = 0
         self.tiempo_esperado = 0
         self.clock_service = clock_service  # Puede ser mock
-    
+
     # metodo resetear el estomago
     def reset(self):
         self.pepinos_comidos = 0
