@@ -1,0 +1,39 @@
+name: CI Actividad 7
+
+on:
+  push:
+    branches: [main]
+    #paths:
+    #  - './Actividad-07/**'
+  pull_request:
+    branches: [main]
+    #paths:
+    #  - './Actividad-07/**'
+
+jobs:
+  test:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Actividad-07
+    steps:
+      - name: Checkout repositorio
+        uses: actions/checkout@v2
+
+      - name: Configurar Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Instalar dependencias
+        run: |
+          pip install -r requirements.txt
+
+      - name: Verificar estilo de código con flake8
+        run: flake8 src/ tests/
+
+      - name: Ejecutar pruebas unitarias y generar reporte JUnit + cobertura
+        run: |
+          mkdir -p reports
+          pytest --junitxml=reports/pytest-report.xml --cov=src --cov-report=html
