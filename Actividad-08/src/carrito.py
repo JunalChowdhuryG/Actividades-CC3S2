@@ -72,3 +72,24 @@ class Carrito:
             descuento = total * (porcentaje / 100)
             return total - descuento
         return total
+
+    # agrega un producto al carrito verificando el stock
+    def agregar_producto(self, producto, cantidad=1):
+        # verificar unidades en el carrito
+        cantidad_en_carrito = 0
+        for item in self.items:
+            if item.producto.nombre == producto.nombre:
+                cantidad_en_carrito = item.cantidad
+                break
+
+        if cantidad_en_carrito + cantidad > producto.stock:
+            raise ValueError("excede el stock disponible")
+
+        # si ya existe incrementa cantidad
+        for item in self.items:
+            if item.producto.nombre == producto.nombre:
+                item.cantidad += cantidad
+                return
+
+        # si no existe agrega nuevo item
+        self.items.append(ItemCarrito(producto, cantidad))

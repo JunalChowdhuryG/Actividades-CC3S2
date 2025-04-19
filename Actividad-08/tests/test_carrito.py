@@ -3,10 +3,9 @@
 import pytest
 from src.carrito import Carrito
 from src.factories import ProductoFactory
-import sys
-import os
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../src')))
 from src.carrito import Carrito
+from src.itemCarrito import ItemCarrito
+from src.producto import Producto
 
 def test_agregar_producto_nuevo():
     """
@@ -249,7 +248,40 @@ def test_descuento_condicional_no_aplicado():
     assert total_descuento == 100.00
 
 
+def test_agregar_producto_dentro_del_stock():
+    """
+    AAA:
+    Arrange:  crea un producto con stock suficiente
+    Act:  agrega dentro del límite
+    Assert:  verifica que se agregó correctamente
+    """
+    # Arrange
+    producto = Producto("Notebook", 1200.00, stock=5)
+    carrito = Carrito()
 
+    # Act
+    carrito.agregar_producto(producto, cantidad=3)
+
+    # Assert
+    items = carrito.obtener_items()
+    assert len(items) == 1
+    assert items[0].cantidad == 3
+
+
+def test_agregar_producto_excede_stock_lanza_error():
+    """
+    AAA:
+    Arrange:  crea un producto con stock limitado
+    Act y Assert:  intenta agregar mas del stock y se lanza un ValueError
+    """
+    # Arrange
+    producto = Producto("Impresora", 600.00, stock=2)
+    carrito = Carrito()
+    carrito.agregar_producto(producto, cantidad=1)
+
+    # Act & Assert
+    with pytest.raises(ValueError):
+        carrito.agregar_producto(producto, cantidad=2)  # Excede el stock
 
 
 
