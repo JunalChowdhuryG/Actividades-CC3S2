@@ -61,3 +61,14 @@ class Carrito:
     # vacia el carrito
     def vaciar(self):
         self.items = []
+
+    # aplica un descuento condicional basado en el total del carrito
+    def aplicar_descuento_condicional(self, porcentaje, minimo):
+        if porcentaje < 0 or porcentaje > 100:
+            raise ValueError("El porcentaje debe estar entre 0 y 100")
+
+        total = self.calcular_total()
+        if total >= minimo:
+            descuento = total * (porcentaje / 100)
+            return total - descuento
+        return total

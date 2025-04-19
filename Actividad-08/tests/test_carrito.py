@@ -193,7 +193,7 @@ def test_vaciar_carrito():
     """
     AAA:
     Arrange: Se crea un carrito con varios productos.
-    Act: Se vacía el carrito.
+    Act: Se vacia el carrito.
     Assert: Se verifica que no hay items y el total es 0.
     """
     # Arrange
@@ -209,6 +209,50 @@ def test_vaciar_carrito():
     # Assert
     assert carrito.obtener_items() == []
     assert carrito.calcular_total() == 0.0
+
+
+def test_descuento_condicional_aplicado():
+    """
+    AAA:
+    Arrange:  agrega un producto con total mayor al minimo.
+    Act:  aplica el descuento condicional.
+    Assert:  verifica que el descuento se aplica correctamente.
+    """
+    # Arrange
+    carrito = Carrito()
+    producto = ProductoFactory(nombre="TV", precio=600.00)
+    carrito.agregar_producto(producto, cantidad=1)  # Total = 600
+    
+    # Act
+    total_descuento = carrito.aplicar_descuento_condicional(15, minimo=500)
+    
+    # Assert
+    assert total_descuento == 510.00
+
+
+def test_descuento_condicional_no_aplicado():
+    """
+    AAA:
+    Arrange: agrega un producto con total menor al minimo.
+    Act: aplica el descuento condicional.
+    Assert: verifica que el total no cambia.
+    """
+    # Arrange
+    carrito = Carrito()
+    producto = ProductoFactory(nombre="USB", precio=100.00)
+    carrito.agregar_producto(producto, cantidad=1)  # Total = 100
+
+    # Act
+    total_descuento = carrito.aplicar_descuento_condicional(15, minimo=200)
+
+    # Assert
+    assert total_descuento == 100.00
+
+
+
+
+
+
 
 
 
