@@ -284,8 +284,54 @@ def test_agregar_producto_excede_stock_lanza_error():
         carrito.agregar_producto(producto, cantidad=2)  # Excede el stock
 
 
+def test_ordenar_items_por_nombre():
+    """
+    AAA:
+    Arrange:  agregan productos en orden aleatorio por nombre
+    Act:  ordenan por nombre
+    Assert:  verifica que el orden es alfabetico
+    """
+    # Arrange
+    carrito = Carrito()
+    prod_c = Producto("Zanahoria", 3.0, stock=10)
+    prod_a = Producto("Arroz", 2.0, stock=10)
+    prod_b = Producto("Banana", 1.0, stock=10)
+
+    carrito.agregar_producto(prod_c)
+    carrito.agregar_producto(prod_a)
+    carrito.agregar_producto(prod_b)
+
+    # Act
+    items_ordenados = carrito.obtener_items_ordenados("nombre")
+
+    # Assert
+    nombres = [item.producto.nombre for item in items_ordenados]
+    assert nombres == ["Arroz", "Banana", "Zanahoria"]
 
 
+def test_ordenar_items_por_precio():
+    """
+    AAA:
+    Arrange:  agregan productos con precios distintos
+    Act:  ordenan por precio
+    Assert: verifica que el orden es de menor a mayor precio
+    """
+    # Arrange
+    carrito = Carrito()
+    prod_caro = Producto("Gamer PC", 1500.0, stock=10)
+    prod_medio = Producto("Monitor", 300.0, stock=10)
+    prod_barato = Producto("Mouse", 50.0, stock=10)
+
+    carrito.agregar_producto(prod_caro)
+    carrito.agregar_producto(prod_medio)
+    carrito.agregar_producto(prod_barato)
+
+    # Act
+    items_ordenados = carrito.obtener_items_ordenados("precio")
+
+    # Assert
+    precios = [item.producto.precio for item in items_ordenados]
+    assert precios == [50.0, 300.0, 1500.0]
 
 
 if __name__ == "__main__":

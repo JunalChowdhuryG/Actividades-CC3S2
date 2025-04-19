@@ -93,3 +93,12 @@ class Carrito:
 
         # si no existe agrega nuevo item
         self.items.append(ItemCarrito(producto, cantidad))
+
+
+    def obtener_items_ordenados(self, criterio: str):
+        if criterio == "nombre":
+            return sorted(self.items, key=lambda item: item.producto.nombre)
+        elif criterio == "precio":
+            return sorted(self.items, key=lambda item: item.producto.precio)
+        else:
+            raise ValueError("criterio no valido")
