@@ -189,5 +189,28 @@ def test_aplicar_descuento_limites():
     with pytest.raises(ValueError):
         carrito.aplicar_descuento(-5)
 
+def test_vaciar_carrito():
+    """
+    AAA:
+    Arrange: Se crea un carrito con varios productos.
+    Act: Se vacía el carrito.
+    Assert: Se verifica que no hay items y el total es 0.
+    """
+    # Arrange
+    carrito = Carrito()
+    producto1 = ProductoFactory(nombre="Producto1", precio=100.00)
+    producto2 = ProductoFactory(nombre="Producto2", precio=200.00)
+    carrito.agregar_producto(producto1, cantidad=2)
+    carrito.agregar_producto(producto2, cantidad=1)
+    
+    # Act
+    carrito.vaciar()
+    
+    # Assert
+    assert carrito.obtener_items() == []
+    assert carrito.calcular_total() == 0.0
+
+
+
 if __name__ == "__main__":
     pytest.main()

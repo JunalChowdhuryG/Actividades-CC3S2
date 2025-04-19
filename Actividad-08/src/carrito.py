@@ -57,3 +57,7 @@ class Carrito:
     # devuelve una lista de los productos en el carrito
     def obtener_items(self):
         return self.items
+    
+    # vacia el carrito
+    def vaciar(self):
+        self.items = []
