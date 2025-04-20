@@ -34,4 +34,4 @@ jobs:
       
       - name: Ejecutar pruebas unitarias Ejercicios Adicionales
         run: |
-          pytest Ejercicio-Adicional/tests/ --cov=src --cov-report=term-missing
+          pytest Ejercicio-Adicional/tests/ --cov=Ejercicio-Adicional/src --cov-report=term-missing
