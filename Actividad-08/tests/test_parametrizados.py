@@ -82,3 +82,22 @@ def test_aplicar_descuento_condicional_parametrizado(precio, cantidad, porcentaj
     carrito.agregar_producto(producto, cantidad)
     total = carrito.aplicar_descuento_condicional(porcentaje, minimo)
     assert total == total_esperado
+
+
+
+# parametros test  calcular impuestos
+@pytest.mark.parametrize(
+    "precio, cantidad, porcentaje, esperado",
+    [
+        (200.0, 2, 10, 40.0),  # 400 * 10%
+        (50.0, 3, 5, 7.5),     # 150 * 5%
+        (100.0, 1, 0, 0.0),    # 100 * 0%
+    ]
+)
+# test parametrizado para calcular impuestos
+def test_calcular_impuestos_parametrizado(precio, cantidad, porcentaje, esperado):
+    carrito = Carrito()
+    producto = ProductoFactory(precio=precio)
+    carrito.agregar_producto(producto, cantidad)
+    impuesto = carrito.calcular_impuestos(porcentaje)
+    assert impuesto == esperado
