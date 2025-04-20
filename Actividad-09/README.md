@@ -1,6 +1,51 @@
 
 # **Actividad 9: Red-Green-Refactor**
 
+## **Cobertura de los Ejercicios y Ejercicios Adicionales**
+### **Cobertura de los Ejercicios al 95%**
+```
+Run pytest tests/ --cov=src --cov-report=term-missing
+============================= test session starts ==============================
+platform linux -- Python 3.9.22, pytest-7.1.2, pluggy-1.5.0
+rootdir: /home/runner/work/Actividades-CC3S2/Actividades-CC3S2/Actividad-09, configfile: pytest.ini
+plugins: Faker-37.1.0, cov-3.0.0, mock-3.10.0
+collected 6 items
+
+tests/test_user_manager.py ......                                        [100%]
+
+---------- coverage: platform linux, python 3.9.22-final-0 -----------
+Name                  Stmts   Miss  Cover   Missing
+---------------------------------------------------
+src/user_manager.py      41      2    95%   18, 48
+---------------------------------------------------
+TOTAL                    41      2    95%
+
+
+============================== 6 passed in 0.12s ===============================
+```
+
+### **Cobertura de los Ejercicios Adicionales al 95%**
+```
+Run pytest Ejercicio-Adicional/tests/ --cov=Ejercicio-Adicional/src --cov-report=term-missing
+============================= test session starts ==============================
+platform linux -- Python 3.9.22, pytest-7.1.2, pluggy-1.5.0
+rootdir: /home/runner/work/Actividades-CC3S2/Actividades-CC3S2/Actividad-09/Ejercicio-Adicional, configfile: pytest.ini
+plugins: Faker-37.1.0, cov-3.0.0, mock-3.10.0
+collected 6 items
+
+Ejercicio-Adicional/tests/test_user_manager.py ......                    [100%]
+
+---------- coverage: platform linux, python 3.9.22-final-0 -----------
+Name                                      Stmts   Miss  Cover   Missing
+-----------------------------------------------------------------------
+Ejercicio-Adicional/src/user_manager.py      41      2    95%   22, 49
+-----------------------------------------------------------------------
+TOTAL                                        41      2    95%
+
+
+============================== 6 passed in 0.10s ===============================
+```
+
 ## **Ejercicio**
 Desarrolla las 6 iteraciones de Desarrollo Guiado por Pruebas (TDD) (Red-Green-Refactor) aplicadas a la clase UserManager, incluyendo casos de mocks, stubs, fakes, spies e inyección de dependencias. Cada iteración presenta un escenario diferente para ilustrar cómo podrías usar estas técnicas.
 
