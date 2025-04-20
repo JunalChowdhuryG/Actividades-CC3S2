@@ -73,27 +73,28 @@ class Carrito:
             return total - descuento
         return total
 
+    # funcion que busca un item en el carrito
+    def _buscar_item(self, producto):
+        for item in self.items:
+            if item.producto.nombre == producto.nombre:
+                return item
+        return None
+
+
     # agrega un producto al carrito verificando el stock
     def agregar_producto(self, producto, cantidad=1):
         # verificar unidades en el carrito
-        cantidad_en_carrito = 0
-        for item in self.items:
-            if item.producto.nombre == producto.nombre:
-                cantidad_en_carrito = item.cantidad
-                break
+        item = self._buscar_item(producto)
+        cantidad_actual = item.cantidad if item else 0
 
-        if cantidad_en_carrito + cantidad > producto.stock:
+        if cantidad_actual + cantidad > producto.stock:
             raise ValueError("excede el stock disponible")
 
-        # si ya existe incrementa cantidad
-        for item in self.items:
-            if item.producto.nombre == producto.nombre:
-                item.cantidad += cantidad
-                return
-
-        # si no existe agrega nuevo item
-        self.items.append(ItemCarrito(producto, cantidad))
-
+        if item:
+            item.cantidad += cantidad
+        else:
+            self.items.append(ItemCarrito(producto, cantidad))
+    
 
     def obtener_items_ordenados(self, criterio: str):
         if criterio == "nombre":
