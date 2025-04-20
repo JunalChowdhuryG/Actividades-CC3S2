@@ -102,3 +102,18 @@ def test_inyectar_repositorio_inmemory():
 
     manager.add_user(username, password)
     assert manager.user_exists(username)
+
+
+
+def test_envio_correo_bienvenida_al_agregar_usuario():
+    # Arrange
+    mock_email_service = MagicMock()
+    manager = UserManager(email_service=mock_email_service)
+    username = "nuevoUsuario"
+    password = "NuevaPass123!"
+
+    # Act
+    manager.add_user(username, password)
+
+    # Assert
+    mock_email_service.send_welcome_email.assert_called_once_with(username)
