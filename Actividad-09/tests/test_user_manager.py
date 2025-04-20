@@ -73,3 +73,32 @@ def test_no_se_puede_agregar_usuario_existente_stub():
         stub_manager.add_user("cualquier", "1234")
 
     assert "ya existe" in str(exc.value)
+
+
+
+# clase para manejar un repositorio de usuarios en memoria
+class InMemoryUserRepository:
+    """Fake de un repositorio de usuarios en memoria."""
+    def __init__(self):
+        self.data = {}
+
+    def save_user(self, username, hashed_password):
+        if username in self.data:
+            raise UserAlreadyExistsError(f"'{username}' ya existe.")
+        self.data[username] = hashed_password
+
+    def get_user(self, username):
+        return self.data.get(username)
+
+    def exists(self, username):
+        return username in self.data
+
+# test agregar usuario exitoso en memoria
+def test_inyectar_repositorio_inmemory():
+    repo = InMemoryUserRepository()
+    manager = UserManager(repo=repo)  # inyectamos repo
+    username = "fakeUser"
+    password = "fakePass"
+
+    manager.add_user(username, password)
+    assert manager.user_exists(username)
