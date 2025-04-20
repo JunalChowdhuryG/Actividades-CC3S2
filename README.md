@@ -44,3 +44,4 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
 * [Actividad 5: Explorando diferentes formas de fusionar en Git](/Actividad-05/README.md)
 * [Actividad 6: Rebase, Cherry-Pick y CI/CD en un entorno ágil](/Actividad-06/README.md)
 * [Actividad 7: Pruebas BDD con behave en español](/Actividad-07/README.md)
+* [Actividad 8: El patrón Arrange-Act-Assert](/Actividad-08/README.md)
