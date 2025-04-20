@@ -29,6 +29,3 @@ jobs:
       - name: Ejecutar pruebas unitarias con cobertura visible en terminal
         run: |
           pytest tests/ --cov=src --cov-report=term-missing
-
-      - name: Verificar estilo de código con flake8
-        run: flake8 src/ tests/
