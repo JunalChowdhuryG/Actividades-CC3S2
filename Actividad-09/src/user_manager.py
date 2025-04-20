@@ -5,12 +5,10 @@ class UserAlreadyExistsError(Exception):
     pass
 
 class UserManager:
-    def __init__(self, hash_service=None, repo=None):
+    def __init__(self, hash_service=None, repo=None, email_service=None):
         self.hash_service = hash_service or self._default_hash_service()
-        self.repo = repo
-        if not self.repo:
-            # Si no se inyecta repositorio, usamos uno interno por defecto
-            self.repo = self._default_repo()
+        self.repo = repo or self._default_repo()
+        self.email_service = email_service  
     
     def _default_hash_service(self):
         class DefaultHashService:
@@ -38,6 +36,8 @@ class UserManager:
     def add_user(self, username, password):
         hashed = self.hash_service.hash(password)
         self.repo.save_user(username, hashed)
+        if self.email_service:
+            self.email_service.send_welcome_email(username)
 
     def user_exists(self, username):
         return self.repo.exists(username)
