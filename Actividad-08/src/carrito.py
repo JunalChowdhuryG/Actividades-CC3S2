@@ -4,14 +4,6 @@ class Carrito:
     def __init__(self):
         self.items = []
 
-    # Agrega un producto al carrito. Si el producto ya existe, aumenta la cantidad.
-    def agregar_producto(self, producto, cantidad=1):
-        for item in self.items:
-            if item.producto.nombre == producto.nombre:
-                item.cantidad += cantidad
-                return
-        self.items.append(ItemCarrito(producto, cantidad))
-
     # Remueve un producto del carrito. Si la cantidad llega a 0, elimina el item.
     def remover_producto(self, producto, cantidad=1):
         for item in self.items:
