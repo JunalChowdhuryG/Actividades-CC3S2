@@ -102,3 +102,8 @@ class Carrito:
             return sorted(self.items, key=lambda item: item.producto.precio)
         else:
             raise ValueError("criterio no valido")
+    
+    # calcula el total de impuestos del carrito (verde)
+    def calcular_impuestos(self, porcentaje):
+        total = self.calcular_total()
+        return total * (porcentaje / 100)
