@@ -1,3 +1,6 @@
 [submodule "Practica-Dirigida-1"]
 	path = Practica-Dirigida-1
 	url = https://github.com/JunalChowdhuryG/Practica-Dirigida-1.git
+[submodule "Prueba_entrada_CC3S2"]
+	path = Prueba_entrada_CC3S2
+	url = https://github.com/JunalChowdhuryG/Prueba_entrada_CC3S2
