@@ -9,7 +9,7 @@ Este proyecto implementa pruebas unitarias en Python utilizando  `pytest`, gener
 * automatizacion: flujo de trabajo en `gitHub actions` que ejecuta pruebas, verifica estilo y publica resultados en cada `push` o `pull_request` a la rama main
 * despliegue de reportes: informe de cobertura HTML publicado en `github pages`, accesible en: 
 ```
-https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-10/
+https://junalchowdhuryg.github.io/Actividades-CC3S2/
 ```
 * artefactos: generados y disponibles en `github actions`:
 * `flake8-report.txt`: Errores de estilo

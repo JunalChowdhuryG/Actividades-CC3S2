@@ -61,7 +61,7 @@ jobs:
     
     - name: Add .nojekyll file
       run: |
-        touch Actividad-10/htmlcov/.nojekyll
+        touch /Actividad-10/htmlcov/.nojekyll
 
     # subir informe cobertura como artefacto
     - name: Upload coverage report
