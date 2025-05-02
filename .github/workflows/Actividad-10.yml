@@ -50,19 +50,6 @@ jobs:
         pytest --cov=Actividad-10 --cov-report=html --cov-report=term-missing -v
       working-directory: Actividad-10
 
-    # Verifica que htmlcov/ existe (debugging)
-    - name: Check htmlcov folder
-      run: |
-        ls -la  Actividad-10/htmlcov/
-        if [ ! -f  Actividad-10/htmlcov/index.html ]; then
-          echo "Error: htmlcov/index.html not found"
-          exit 1
-        fi
-    
-    - name: Add .nojekyll file
-      run: |
-        touch Actividad-10/htmlcov/.nojekyll
-
     # subir informe cobertura como artefacto
     - name: Upload coverage report
       uses: actions/upload-artifact@v4
@@ -70,16 +57,3 @@ jobs:
         name: coverage-report
         path: Actividad-10/htmlcov/
 
-    # configurar github page
-    - name: Setup Pages
-      uses: actions/configure-pages@v5
-
-    - name: Upload Pages artifact
-      uses: actions/upload-pages-artifact@v3
-      with:
-        path: Actividad-10/htmlcov/
-
-    - name: Deploy to GitHub Pages
-      uses: actions/deploy-pages@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
