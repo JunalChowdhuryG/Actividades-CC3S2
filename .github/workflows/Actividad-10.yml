@@ -47,14 +47,14 @@ jobs:
     # ejecutar  pruebas de cobertura
     - name: Run tests with coverage
       run: |
-        pytest --cov=pruebas_pytest --cov-report=html --cov-report=term-missing -v
+        pytest --cov=Actividad-10 --cov-report=html --cov-report=term-missing -v
       working-directory: Actividad-10
 
     # Verifica que htmlcov/ existe (debugging)
     - name: Check htmlcov folder
       run: |
-        ls -la pruebas_pytest/htmlcov/
-        if [ ! -f pruebas_pytest/htmlcov/index.html ]; then
+        ls -la  Actividad-10/htmlcov/
+        if [ ! -f  Actividad-10/htmlcov/index.html ]; then
           echo "Error: htmlcov/index.html not found"
           exit 1
         fi
