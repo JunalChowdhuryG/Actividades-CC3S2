@@ -22,3 +22,5 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
 * [Actividad 7: Pruebas BDD con behave en español](/Actividad-07/README.md)
 * [Actividad 8: El patrón Arrange-Act-Assert](/Actividad-08/README.md)
 * [Actividad 9: Red-Green-Refactor](/Actividad-09/README.md)
+* [Actividad 10: Ejecutar pruebas con pytest](/Actividad-10/README.md)
+    - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/)
