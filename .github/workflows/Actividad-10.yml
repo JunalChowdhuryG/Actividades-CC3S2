@@ -6,12 +6,15 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  id-token: write
+  contents: read
+  pages: write 
+
 jobs:
   test:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: Actividad-10
+
     steps:
     # clonar repositorio
     - name: Checkout code
@@ -28,18 +31,20 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest pytest-cov
+      working-directory: Actividad-10
 
     # ejecutar flake8
     - name: Run flake8
       run: |
         flake8 . --output-file=flake8-report.txt --tee
+      working-directory: Actividad-10
       continue-on-error: true
-
 
     # ejecutar  pruebas de cobertura
     - name: Run tests with coverage
       run: |
         pytest --cov=pruebas_pytest --cov-report=html --cov-report=term-missing -v
+      working-directory: Actividad-10
 
     # subir informe cobertura como artefacto
     - name: Upload coverage report
