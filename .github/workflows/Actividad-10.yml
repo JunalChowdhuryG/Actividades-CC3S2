@@ -58,6 +58,11 @@ jobs:
           echo "Error: htmlcov/index.html not found"
           exit 1
         fi
+    
+    - name: Add .nojekyll file
+      if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+      run: |
+        touch pruebas_pytest/htmlcov/.nojekyll
 
     # subir informe cobertura como artefacto
     - name: Upload coverage report
