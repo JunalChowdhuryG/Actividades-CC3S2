@@ -62,7 +62,7 @@ jobs:
     - name: Add .nojekyll file
       if: github.event_name == 'push' && github.ref == 'refs/heads/main'
       run: |
-        touch pruebas_pytest/htmlcov/.nojekyll
+        touch Actividad-10/htmlcov/.nojekyll
 
     # subir informe cobertura como artefacto
     - name: Upload coverage report
