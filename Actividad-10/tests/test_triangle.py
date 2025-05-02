@@ -1,5 +1,5 @@
 from unittest import TestCase
-from triangle import area_of_a_triangle
+from src.triangle import area_of_a_triangle
 
 
 class TestAreaOfTriangle(TestCase):
