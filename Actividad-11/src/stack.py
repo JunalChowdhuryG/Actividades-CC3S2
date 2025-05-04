@@ -1,10 +1,10 @@
-# stack.py
-
 from typing import Any
 
+
 class Stack:
+
     def __init__(self):
-        """Inicializa una pila vacía."""
+        """Inicializa una pila vacia."""
         self.items = []
 
     def push(self, data: Any) -> None:
@@ -14,15 +14,15 @@ class Stack:
     def pop(self) -> Any:
         """Elimina y devuelve el elemento en la parte superior de la pila."""
         if self.is_empty():
-            raise IndexError("La pila está vacía")
+            raise IndexError("La pila esta vacia")
         return self.items.pop()
 
     def peek(self) -> Any:
         """Devuelve el elemento en la parte superior de la pila sin eliminarlo."""
         if self.is_empty():
-            raise IndexError("La pila está vacía")
+            raise IndexError("La pila esta vacia")
         return self.items[-1]
 
     def is_empty(self) -> bool:
-        """Devuelve True si la pila está vacía, False si no lo está."""
+        """Devuelve True si la pila esta vacia, False si no lo esta."""
         return len(self.items) == 0
