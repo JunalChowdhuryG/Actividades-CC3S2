@@ -27,3 +27,5 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-10/docs/)
 * [Actividad 11: Pruebas Pytest con Aserciones](/Actividad-11/README.md)
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-11/docs/)
+* [Actividad 12: Pruebas con Pytest y Fixtures](/Actividad-12/README.md)
+    - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-12/docs/)
