@@ -10,3 +10,6 @@
 [submodule "Practica-Dirigida-3"]
 	path = Practica-Dirigida-3
 	url = https://github.com/JunalChowdhuryG/Practica-Dirigida-3.git
+[submodule "Practica-Dirigida-4"]
+	path = Practica-Dirigida-4
+	url = git@github-portafolio:JunalChowdhuryG/Practica-Dirigida-4.git
