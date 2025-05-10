@@ -1,0 +1,31 @@
+REPORTE DEL REPOSITORIO 
+
+=== Estado del repositorio ===
+On branch feature/merge-theirs
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   git_avanzado.sh
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	reporte_git.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+=== Ramas existentes ===
+  feature/login
+* feature/merge-theirs
+  main
+  nombre_rama_nueva
+
+=== Últimos 5 commits ===
+2f87c74 Merge branch 'main' into feature/merge-theirs
+4b956d3 add .
+cd70fd4 add .
+f8cdef3 commit readme en feature/merge-theirs
+7a32bf3 commit readme en main
+
+=== Lista de stashes ===
+
+ FIN DEL REPORTE

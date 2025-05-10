@@ -1,0 +1,9 @@
+# Ignorar archivos temporales y de respaldo
+*~
+*.swp
+.DS_Store
+
+# Ignorar logs y directorios de compilación
+logs/
+build/
+temp/
