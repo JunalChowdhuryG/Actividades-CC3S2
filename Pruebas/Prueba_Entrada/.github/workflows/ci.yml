@@ -1,0 +1,41 @@
+name: Python CI
+
+on:
+  push:
+    branches: [main,qa/coverage-threshold]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install dependencies
+        run: |
+          pip install -r app/requirements.txt
+          pip install coverage bandit
+
+      - name: Run tests
+        run: | 
+          coverage run -m pytest app/tests
+          coverage xml
+
+      - name: Set up Java for SonarCloud
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        
+      - name: Run Bandit Security Scan
+        run: bandit -r app
+      
