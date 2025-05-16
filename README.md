@@ -31,3 +31,5 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-12/docs/)
 * [Actividad 13: Objetos Mocking](/Actividad-13/README.md)
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-13/docs/)
+* [Actividad 14: Factory y Fakes](/Actividad-14/README.md)
+    - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-14/docs/)
