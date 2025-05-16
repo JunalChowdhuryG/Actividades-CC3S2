@@ -12,12 +12,14 @@ from models import db
 from models.account import Account, DataValidationError
 from factories import AccountFactory
 
+
 @pytest.fixture(scope="session", autouse=True)
 def setup_database():
     """Configura la base de datos antes de las pruebas"""
     db.create_all()
     yield
     db.session.close()
+
 
 @pytest.fixture(autouse=True)
 def clean_tables():
@@ -26,6 +28,7 @@ def clean_tables():
     db.session.commit()
     yield
     db.session.remove()
+
 
 class TestAccountModel:
     """Pruebas para el Modelo Account"""
