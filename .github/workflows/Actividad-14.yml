@@ -1,0 +1,47 @@
+name:  CI Actividad 14
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Actividad-14
+
+    steps:
+    # clonar repositorio
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    # configurar Python
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    # instalar dependencias
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    # ejecutar flake8
+    - name: Run flake8
+      run: |
+        flake8 models/ --output-file=flake8-report.txt --tee
+
+    # ejecutar  pruebas de cobertura
+    - name: Run tests with coverage
+      run: |
+       pytest tests/ --cov=models --cov-report=html
+
+    # subir informe cobertura como artefacto
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-report
+        path: Actividad-14/htmlcov/
