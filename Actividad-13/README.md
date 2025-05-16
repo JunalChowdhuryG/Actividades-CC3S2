@@ -1,4 +1,4 @@
-# **Actividad: Objetos Mocking**
+# **Actividad 13: Objetos Mocking**
 
 Este proyecto implementa pruebas unitarias en Python utilizando `pytest` y la biblioteca `unittest.mock` para validar la clase `IMDb` en `models/imdb.py` . Se utilizan **fixtures** para cargar respuestas simuladas de la API de IMDb desde un archivo JSON y **mocking** para simular llamadas a servicios externos  evitando depender de la API real durante las pruebas. Tambien se incluye un `Makefile` para facilitar la ejecucion de tareas localmente
 
