@@ -28,3 +28,4 @@ Given <initial context or system state>
 When <user performs an action>
 Then <expected outcome or behavior>
 And <optional additional conditions>
+```
