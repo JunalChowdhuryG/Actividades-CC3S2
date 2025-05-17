@@ -1,10 +1,18 @@
 ---
-name: User Story
+name: "[User Story] <Short Title>"
 about: Template for defining clear and structured user stories
 title: ''
 labels: user_story
 assignees: JunalChowdhuryG
 
+---
+
+---
+name: User Story
+about: Template for defining clear and structured user stories
+title: "[User Story] <Short Title>"
+labels: ["user story"]
+assignees: ""
 ---
 
 ## User story  
