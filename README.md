@@ -33,5 +33,4 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-13/docs/)
 * [Actividad 14: Factory y Fakes](/Actividad-14/README.md)
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-14/docs/)
-* [Actividad 17: Gestión ágil de proyectos con GitHub Projects, configuración de Kanban Board y creación de historias de usuario](/Actividad-17/README.md)
-    - Visualizar tablero Kanban: [Tablero Kanban](https://github.com/users/JunalChowdhuryG/projects/2)
+
