@@ -224,3 +224,78 @@ Se integro una nueva historia basada en comentarios de stakeholders
 
 **Captura de pantalla**: Issue #10 en el tablero  
 ![Issue 9 en tablero final](img/E5-Issue-9-Tablero-Final.png)
+
+
+
+# Actividad 18: Gestion agil de sprints con GitHub, planificacion, ejecucion y cierre de Sprints
+
+
+Continuando con el tablero kanban de la [Actividad 17](#actividad-17-gestion-agil-de-proyectos-con-github-projects):
+
+## Parte 1: Configuracion de Sprints y Creacion de Sprint Plan
+
+Se configuraron sprints y se creo un sprint plan asignando historias del **Product Backlog** al **Sprint Backlog** con estimaciones de puntos de historia.
+
+**Pasos realizados**:
+1. Se creo un campo **Sprint** de tipo **Iteration** en GitHub Projects con una duracion de dos semanas.
+2. Se asignaron puntos de historia y el sprint a las siguientes historias:
+   - **Need a service that has a counter**: 8 puntos, asignada a Sprint 1.
+   - **Must persist counter across restarts**: 5 puntos, asignada a Sprint 1.
+   - **Deploy service to the cloud**: 5 puntos, asignada a Sprint 1.
+3. Las historias fueron movidas del **Product Backlog** al **Sprint Backlog**.
+4. Se estimaron las historias restantes en el **Product Backlog**:
+   - **Counters can be reset**: 3 puntos.
+   - **Need ability to update a counter to new value**: 5 puntos.
+
+**Captura de pantalla**: Kanban board con Sprint Backlog  
+![Sprint Backlog](img/A1.png)
+
+
+## Parte 2: Flujo de Trabajo Diario
+
+Se simulo el flujo de trabajo diario moviendo historias a traves de las columnas del tablero Kanban (**Sprint Backlog**, **In Progress**, **Review/QA**, **Done**).
+
+**Pasos realizados**:
+1. Se asigno la historia **Need a service that has a counter** al usuario y se movio a **In Progress**.
+2. Una vez completada, se movio a **Review/QA** y luego a **Done** tras la aprobacion.
+3. Se repitio el proceso para **Must persist counter across restarts**:
+   - Asignada al usuario, movida a **In Progress**, luego a **Review/QA**, y finalmente a **Done**.
+4. La historia **Deploy service to the cloud** fue asignada y movida a **In Progress**, pero no se completo antes del fin del sprint.
+
+**Captura de pantalla**: Kanban board al final del flujo de trabajo  
+![Kanban Board Flujo Diario](img/A-18-P1.jpeg)
+
+
+## Parte 3: Configuracion de Burndown Chart
+
+Se configuro un burndown chart para rastrear el progreso del sprint, mostrando el estado de las historias completadas y los puntos de historia.
+
+**Pasos realizados**:
+1. Se accedio a la seccion **Insights** en GitHub Projects y se genero un grafico inicial.
+2. Se aplico un filtro para mostrar solo las historias en la columna **Done**.
+3. Se configuro un nuevo burndown chart con las siguientes opciones:
+   - **Layout**: Column.
+   - **X-axis**: Sprint.
+   - **Group by**: Status.
+   - **Y-axis**: Sum of a field (Estimate).
+4. Se filtro el grafico para centrarse en **Sprint 1**, mostrando los puntos de historia completados (13 puntos para **Need a service that has a counter** y **Must persist counter across restarts**) y los puntos restantes (5 puntos para **Deploy service to the cloud**).
+
+**Captura de pantalla**: Burndown Chart configurado  
+![Burndown Chart](img/A3.jpeg)
+
+
+## Parte 4: Cierre de Sprint
+
+Se gestionaron las historias no completadas y se organizo el **Product Backlog** para el proximo sprint.
+
+**Pasos realizados**:
+1. La historia **Deploy service to the cloud** (5 puntos) no se completo y permanecio en **In Progress**.
+2. Se revisaron los story points para reflejar el esfuerzo realizado en la historia incompleta (si aplica, se ajustaron los puntos).
+3. Se crearon nuevos issues (si es necesario) para documentar deuda tecnica o trabajo pendiente relacionado con **Deploy service to the cloud**.
+4. Se reorganizo el **Product Backlog**, priorizando las historias restantes:
+   - **Counters can be reset** (3 puntos).
+   - **Need ability to update a counter to new value** (5 puntos).
+5. Las historias en **Icebox** (**Must allow multiple counters**, **Need the ability to remove a counter**) se mantuvieron sin cambios para evaluacion futura.
+
+**Captura de pantalla**: Kanban board al cierre del sprint  
+![Cierre de Sprint](img/A4.png)
