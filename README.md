@@ -35,4 +35,5 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar cobertura: [Cobertura pytest](https://junalchowdhuryg.github.io/Actividades-CC3S2/Actividad-14/docs/)
 * [Actividad 17: Gestion agil de Proyectos con GitHub Projects](/Actividad-17-18/README.md)
     - Visualizar Tablero Kanban: [Tablero Kanban Grupo 2](https://github.com/users/JunalChowdhuryG/projects/4)
-
+* [Actividad 24: Actividad 24: Introduccion a Docker, ETL en Docker Compose](/Actividad-24/README.md)
+    - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-24](https://github.com/JunalChowdhuryG/Actividad-24)
