@@ -2,11 +2,9 @@
 ## Prueba de entrada
 * [Prueba_entrada_CC3S2](https://github.com/JunalChowdhuryG/Prueba_entrada_CC3S2)
 
-| **Prueba**                     | **Resultados**                                                                 |
-|--------------------------------|--------------------------------------------------------------------------------|
-| Tests Completados              | 32 passed (100% de cobertura en pruebas)                                      |
-| Bandit Security Scan           | 0 issues (todas las metricas en 0.0 - sin vulnerabilidades detectadas)        |
-| SonarQubeCloud / SonarCloud    | 96.3% Coverage on New Code, 0.0% Duplication, 4 Security Hotspots (no criticos) |
+## Practica Calificada
+* [Practica Calificada 3](https://github.com/JunalChowdhuryG/Grupo-2-Practica-Calificada-3)
+* [Practica Calificada 4](https://github.com/JunalChowdhuryG/Grupo-2-Practica-Calificada-4)
 
 ## Practica Dirigidas
 * [Practica Dirigida 1](https://github.com/JunalChowdhuryG/Practica-Dirigida-1/blob/main/README.md)
@@ -37,8 +35,9 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar Tablero Kanban: [Tablero Kanban Grupo 2](https://github.com/users/JunalChowdhuryG/projects/4)
 * [Actividad 18: Gestión ágil de sprints con GitHub, planificación, ejecución y cierre de Sprints](/Actividad-17-18/README.md)
     - Visualizar Tablero Kanban: [Tablero Kanban Grupo 2](https://github.com/users/JunalChowdhuryG/projects/4)
-* [Actividad 24: Actividad 24: Introduccion a Docker, ETL en Docker Compose](/Actividad-24/README.md)
+* [Actividad 24: Introduccion a Docker, ETL en Docker Compose](/Actividad-24/README.md)
     - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-24](https://github.com/JunalChowdhuryG/Actividad-24)
+* [Actividad 25: Arquitectura y desarrollo de microservicios con Docker y Kubernetes](Actividad-25/README.md)
 * [Actividad 27: Migrando a Microservicios: Docker, Kubernetes y CI/CD](/Actividad-27/README.md)
     - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-27](https://github.com/JunalChowdhuryG/Actividad-27)
     
