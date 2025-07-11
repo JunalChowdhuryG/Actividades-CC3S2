@@ -120,5 +120,181 @@ ll principio DRY (Don’t Repeat Yourself) busca evitar la duplicacion de codigo
 - **Duplicacion controlada:** en varios casos es preferible duplicar pequeñas porciones de codigo en cada microservicio para preservar su independencia. Por ejemplo, cada servicio puede implementar su propia logica de validacion en lugar de depender de una biblioteca compartida la duplicacion debe ser minima y justificada
 
 
+**6.3. Discute criterios para decidir el tamaño de un servicio (ej. regla de la "una tabla por servicio" o "una capacidad de negocio por servicio").**
+
+el tamaño de un microservicio es clave para evitar servicios demasiado grandes tambien se llamaa mini-monolitos o demasiado pequeños cuando se exceden en fragmentación
+  
+**criterios:**
+
+- **"una tabla por servicio"**: cada microservicio debería gestionar una única tabla o un conjunto pequeño de tablas relacionadas en su base de datos, para asuegurarse que el servicio sea cohesivo y tenga una sola responsabilidad **SRP**
+
+- **capacidad de negocio por servicio:** un microservicio debe alinearse con una capacidad específica del negocio, como el procesar pagos o la gestionar inventario esto sigue los principios de DDD y facilita escalabilidad
+
+- **tamaño manejable por un equipo:** un servicio debe ser lo  pequeño como para que un equipo pequeño  pueda desarrollarlo y mantenerlo sin fricciones
+
+
+
+## **II. Empaquetado y publicación con Docker**
+
+### **1. Creación de un Dockerfile**
+El Dockerfile del proyecto:
+
+```Dockerfile
+# Etapa de construcción 
+FROM python:3.12-slim AS builder
+
+# Evitar archivos .pyc y forzar salida no bufferizada
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
+
+WORKDIR /build
+
+# Copiar dependencias y resolverlas en el usuario actual
+COPY requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+
+# Etapa de producción 
+FROM python:3.12-slim AS production
+
+# Usuario y grupo de la aplicación
+ARG APP_USER=appuser
+RUN groupadd -r ${APP_USER} \
+    && useradd -m -r -g ${APP_USER} ${APP_USER}
+
+# Variables de entorno para el usuario no root
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PATH="/home/${APP_USER}/.local/bin:${PATH}"
+
+WORKDIR /app
+
+# Copiar binarios y dependencias instaladas
+COPY --from=builder /root/.local /home/${APP_USER}/.local
+
+# Copiar todo el código fuente
+COPY . /app
+
+# <- AÑADE ESTO para dar permisos sobre /app
+RUN chown -R ${APP_USER}:${APP_USER} /app
+
+# Ejecutar como usuario no root
+USER ${APP_USER}
+
+# Puerto expuesto por la aplicación
+EXPOSE 80
+
+# Comando por defecto
+CMD ["uvicorn", "microservice.main:app", "--host", "0.0.0.0", "--port", "80"]
+```
+
+**1.1. Estructura multi-stage: etapa de builder (instalación de dependencias) y etapa de producción (imagen slim, usuario non-root).**
+
+* etapa de builder `FROM python:3.12-slim AS builder`:
+    - usa la imagen base `python:3.12-slim` para minimizar el tamaño
+    - configura el directorio de trabajo en `/build`
+    - copia `requirements.txt` e instala las dependencias con `pip install --user --no-cache-dir -r requirements.txt` la opción `--user` instala las dependencias en el directorio del usuario `/root/.local`  y `--no-cache-dir` evita almacenar caché de pip, reduciendo el tamaño de la imagen
+
+* etapa de producción `FROM python:3.12-slim AS production`:
+    - usa la misma imagen base ligera para consistencia
+    - crea un usuario no privilegiado `appuser` con `groupadd` y useradd para mejorar la seguridad, evitando ejecutar el contenedor como root
+    - copia las dependencias instaladas desde `/root/.local` etapa builder a `/home/appuser/.local` y el código fuente completo a `/app`
+    - ajusta los permisos del directorio /app con chown -R appuser:appuser /app para que el usuario no root tenga acceso
+    - cambia al usuario appuser con `USER appuser` y expone el `puerto 80` donde la aplicación  escucha solicitudes
+
+
+
+**1.2. Importancia de variables de entorno (PYTHONDONTWRITEBYTECODE, PYTHONUNBUFFERED) y de definir un ENTRYPOINT claro.**
+* **Variables de entorno**
+    - `PYTHONDONTWRITEBYTECODE=1`: evita la generación de archivos `.pyc` lo que reduce el tamaño de la imagen y previene problemas de permisos en volúmenes
+    - `PYTHONUNBUFFERED=1`: desactiva el buffering de la salida estándar
+    - `PATH="/home/${APP_USER}/.local/bin:${PATH}"`: añade el directorio de binarios del usuario 
+
+* **CMD en lugar de ENTRYPOINT**
+    - el `Dockerfile` usa CMD `["uvicorn", "microservice.main:app", "--host", "0.0.0.0", "--port", "80"]` para definir el comando por defecto  essto inicia el servidor FastAPI  vinculándolo al puerto 80
+
+
+
+### **2. Empaquetado y Verificación**
+
+**2.1. Comando de construcción: docker build -t ejemplo-microservice:0.1.0 . y opciones como --no-cache.**
+- `docker build -t ejemplo-microservice:0.1.0 .` construye la imagen con el nombre ejemplo-microservice y la versión 0.1.0 desde el directorio actual siguiendo la estructura multi-stage del `Dockerfile` la opcion `--no-cache`  ignora la caché de capas estoo aseguraa que las dependencias se reinstalen desde cero
+
+**2.2. Flujo de prueba: docker run -d -p 80:80 ejemplo-microservice:0.1.0 y curl -i http://localhost/api/items/ para validar status y payload.**
+- `-i http://localhost/api/items/` esto verifica que la API responda correctamente
+
+
+### **3. Depuración de contenedores**
+
+**3.1. Visualización de logs en tiempo real: docker logs -f ejemplo-ms.**
+- `docker logs -f ejemplo-ms` muestra los logs en tiempo real del contenedor gracias a `PYTHONUNBUFFERED=1` en el Dockerfile
+
+### **5. Buenas prácticas de tags**
+
+**5.1. Uso de SemVer (MAJOR.MINOR.PATCH) y tag latest para entornos de staging.**
+- etiquetar imágenes con versiones `MAJOR.MINOR.PATCH`  para tenner claridad y trazabilidad y el tag `latest` se usa en entornos de staging para pruebas rápidas pero no utiliza en producción ya que no garantiza estabilidad
+
+
+**5.2. Estrategias de limpieza: políticas de retención en el registry y docker image prune --filter "until=24h".**
+
+- configurar políticas de retención en el registro para eliminar imágenes antiguas  un ejemplo seria mantener solo las últimas 5 versiones
+- usar `docker image prune --filter "until=24h"` para eliminar lass imágenes  que no se utilizan creadas hace más de 24 horas optimizando espacio local
+
+
+## **III. Desarrollo y despliegue avanzado**
+
+
+### **1. Docker Compose para desarrollo**
+
+#### **1.1. Fundamentos de Docker Compose**
+
+##### **Teórico**
+
+* Explica qué ventajas aporta Compose frente al uso de `docker run` por separado (declaratividad, dependencias, redes).
+    - Docker compose es una herramienta que permite definir y gestionar múltiples contenedores de forma declarativa mediante archivo docker-compose.yml las ventajas sobre el `docker run` son:
+        - **es declaratividad:** ya que  solo archivo YAML define servicios y redes y volúmenes y dependencias simplificando la configuración y reduciendo errores manuales a diferencia de varios comandos `docker run`
+        - **la gestión de de dependencias**: ya uque permite especificar dependenciass entre servicios con `depends_on`
+
+* Define conceptos: servicios, volúmenes, redes, perfiles (`profiles`), y cómo Compose los orquesta.
+##### **Ejercicio teórico**
+
+1. Enumera al menos tres escenarios donde Docker Compose facilite el flujo de desarrollo (p. ej., replicar entornos staging, pruebas de integración local, debugging con recarga en vivo).
+2. Justifica por qué usarías perfiles (`profiles`) para separar entornos "dev" y "test".
+
+#### **1.2. Estructura de `docker-compose.yml`**
+
+##### **Teórico**
+
+* Detalla la sintaxis de los bloques principales: `services`, `volumes`, `networks`.
+* Explica el uso de `depends_on`, variables de entorno y montajes (`bind mounts` vs `named volumes`).
+
+##### **Ejercicio práctico (redacción)**
+
+1. Diseña por escrito un fragmento de `docker-compose.yml` que levante un servicio FastAPI con recarga en vivo y una base de datos Postgres, indicando:
+
+    * Cómo definirías el `bind mount` para el código fuente.
+    * Qué usuario o permisos ajustarías dentro del contenedor para evitar problemas de escritura.
+
+2. Describe en palabras cómo Compose garantiza que la base de datos arranque antes que la API.
+
+#### **1.3. Flujo de trabajo con Compose**
+
+##### **Teórico**
+
+* Describe los comandos esenciales:
+
+    * `docker-compose up --build`
+    * `docker-compose logs -f <servicio>`
+    * `docker-compose down --volumes`
+* Explica el propósito de cada uno y efectos colaterales (p.ej., recreación de contenedores, limpieza de volúmenes).
+##### **Ejercicio práctico (manos a la obra)**
+
+1. Escribe en orden los comandos que usaría un desarrollador para:
+
+    * Iniciar el entorno en modo desarrollo con recarga.
+    * Cambiar al perfil `staging` (sin recarga) y reiniciar sólo la API.
+    * Detener todo y eliminar volúmenes.
+
+2. Pon en un pequeño script bash (`setup-dev.sh`) esos comandos con comentarios apropiados.
 
 
