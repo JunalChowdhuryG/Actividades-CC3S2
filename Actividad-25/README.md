@@ -250,51 +250,114 @@ CMD ["uvicorn", "microservice.main:app", "--host", "0.0.0.0", "--port", "80"]
 
 ##### **Teórico**
 
-* Explica qué ventajas aporta Compose frente al uso de `docker run` por separado (declaratividad, dependencias, redes).
+* **Explica qué ventajas aporta Compose frente al uso de `docker run` por separado (declaratividad, dependencias, redes).**
     - Docker compose es una herramienta que permite definir y gestionar múltiples contenedores de forma declarativa mediante archivo docker-compose.yml las ventajas sobre el `docker run` son:
         - **es declaratividad:** ya que  solo archivo YAML define servicios y redes y volúmenes y dependencias simplificando la configuración y reduciendo errores manuales a diferencia de varios comandos `docker run`
         - **la gestión de de dependencias**: ya uque permite especificar dependenciass entre servicios con `depends_on`
+        - **las redes aisladas:** se crea automáticamente redes privadas para que los servicioss se comuniquen entre ellos
 
-* Define conceptos: servicios, volúmenes, redes, perfiles (`profiles`), y cómo Compose los orquesta.
+* **Define conceptos: servicios, volúmenes, redes, perfiles (`profiles`), y cómo Compose los orquesta.**
+
+    - **servicios**: representa contenedores individuales donde cada servicio especifica su imagen , puerto  y variable de entorno y dependencias
+    - **volúmenes**: los persisten datos como datos de una base de datos o montan código fuente para desarrollo 
+    - **redes**: se definen redes privadas para la comunicación entre servicios
+    - **perfiles** permiten ejecutar subconjuntos de servicios según el entorno 
+
 ##### **Ejercicio teórico**
 
-1. Enumera al menos tres escenarios donde Docker Compose facilite el flujo de desarrollo (p. ej., replicar entornos staging, pruebas de integración local, debugging con recarga en vivo).
-2. Justifica por qué usarías perfiles (`profiles`) para separar entornos "dev" y "test".
+1. **Enumera al menos tres escenarios donde Docker Compose facilite el flujo de desarrollo (p. ej., replicar entornos staging, pruebas de integración local, debugging con recarga en vivo).**
+
+- **replicar entornos staging:** el compose define un entorno local con servicios idénticos a los de staging se asegura  que las pruebas locales repliquenn el comportamiento de producción esto reduce errores debido a diferencias de configuración
+
+- **pruebas de integración local**: facilita probar interacciones entre servicios 
+
+- **debugging con recarga en vivo:** usa bind mounts los cambios en el código fuente se reflejan instantáneamente lo que permitie depurar rápidamente sin teneer que reconstruir imágenes
+
+2. **Justifica por qué usarías perfiles (`profiles`) para separar entornos "dev" y "test".**
+
+- **perfil dev** se habilita la recarga en vivo (--reload) y se montan volúmene para código fuente esto optimiza la iteración rápida
+- **perfil test** se usa configuracione optimisadas para pruebas  y se desactiva la recarga para simular un entorno más cerca a produccción
+
 
 #### **1.2. Estructura de `docker-compose.yml`**
 
 ##### **Teórico**
 
-* Detalla la sintaxis de los bloques principales: `services`, `volumes`, `networks`.
-* Explica el uso de `depends_on`, variables de entorno y montajes (`bind mounts` vs `named volumes`).
+* **Detalla la sintaxis de los bloques principales: `services`, `volumes`, `networks`.**
+
+    - **services:** define  contenedores  incluye imagen , puertos y  variabless de entorno y volúmenes y dependencias
+    - **volumes:** configura volúmenes nombrados para persistencia datos 
+    - **networks:** especifica redes privadas para la comunicación entre servicios
+* **Explica el uso de `depends_on`, variables de entorno y montajes (`bind mounts` vs `named volumes`).**
+
+    - **depends_on:** indica el orden de arranque de los servicios
+    - **variables de entorro:** configuran el comportamiento de los servicios
+    - **Bind mounts vs named volumes** Bind mounts  montan un directorio del host en el contenedor esto refleja cambios en el codigo en tiempo real y named volumes persisten datos entre ejecuciones
+
+
 
 ##### **Ejercicio práctico (redacción)**
 
-1. Diseña por escrito un fragmento de `docker-compose.yml` que levante un servicio FastAPI con recarga en vivo y una base de datos Postgres, indicando:
+1. **Diseña por escrito un fragmento de `docker-compose.yml` que levante un servicio FastAPI con recarga en vivo y una base de datos Postgres, indicando:**
 
     * Cómo definirías el `bind mount` para el código fuente.
     * Qué usuario o permisos ajustarías dentro del contenedor para evitar problemas de escritura.
 
-2. Describe en palabras cómo Compose garantiza que la base de datos arranque antes que la API.
+2. **Describe en palabras cómo Compose garantiza que la base de datos arranque antes que la API.**
+
+    - el atributo `depends_on: [base_de_datos]` asegura que el servicio `base_de_datos` se inicie antes que el servicio `api` Docker Compose espera que el contenedor  base de datos esté en  "runing" antes de iniciar la API
+
+
 
 #### **1.3. Flujo de trabajo con Compose**
 
 ##### **Teórico**
 
-* Describe los comandos esenciales:
+1. **Describe los comandos esenciales:**
 
-    * `docker-compose up --build`
-    * `docker-compose logs -f <servicio>`
-    * `docker-compose down --volumes`
-* Explica el propósito de cada uno y efectos colaterales (p.ej., recreación de contenedores, limpieza de volúmenes).
+    - **`docker-compose up --build`**: construye imágenes definidas en el `build` del `docker-compose.yml` levanta todos los servicios opción `--build` fuerza la reconstrucción de la imagen
+
+    - **`docker-compose logs -f <servicio>`**: muestra logs en tiempo real de servicio específico   
+    
+    - **`docker-compose down --volumes`**: detiene y elimina todos los contenedores y redes y volúmenes definidos limpia el entorno la opción `--volumes` elimina datos persistentes
+
+
+
+2.  **Explica el propósito de cada uno y efectos colaterales (p.ej., recreación de contenedores, limpieza de volúmenes).**
+- **`up --build`**: reconstruye imágen pero puede aumentar el tiempo de inicio si la instalación  es lenta  
+- **`logs -f`**: no afecta el estado de los contenedore consume recursos si se mantiene abierto por mucho tiempo
+- **`down --volumes`**: elimina datos persistentes  puede ser destructivo en entorrnos con datos importantes
+
+
+
 ##### **Ejercicio práctico (manos a la obra)**
 
-1. Escribe en orden los comandos que usaría un desarrollador para:
+1. **Escribe en orden los comandos que usaría un desarrollador para:**
+- **Iniciar en modo desarrollo con recarga**:  
+  - `docker-compose --profile dev up --build`: levanta servicios con  perfil `dev` construye la imagen del `Dockerfile` habilita recarga en vivo para la API con `--reload`
+- **Cambiar al perfil `staging` (sin recarga) y reiniciar solo la API**:  
+  - `docker-compose --profile staging up -d api` levanta  el servicio `api` con el perfil `staging` usando el `CMD` del `Dockerfile`  simula  entorno producción
+- **Detener todo y eliminar volúmenes**:  
+  - `docker-compose down --volumes`: detiene los servicios y elimina contenedores y redes y volúmenes y  datos de la base de datos
 
-    * Iniciar el entorno en modo desarrollo con recarga.
-    * Cambiar al perfil `staging` (sin recarga) y reiniciar sólo la API.
-    * Detener todo y eliminar volúmenes.
 
-2. Pon en un pequeño script bash (`setup-dev.sh`) esos comandos con comentarios apropiados.
+2. **Pon en un pequeño script bash (`setup-dev.sh`) esos comandos con comentarios apropiados.**
+
+    ```bash
+    # entorno  modo desarrollo con recarga  vivo
+    echo "incia entorno desarrollo"
+    docker-compose --profile dev up --build
+
+    # perfil staging sin recarga y reinicia solo la API
+    echo "perfil staging y reinico API"
+    docker-compose --profile stagging up -d api
+
+    # detiene los servicios y elimina volúmenes
+    echo "detiene servicios elimina volúmen"
+    docker-compose down --volumes
+    ```
+
+
+
 
 
