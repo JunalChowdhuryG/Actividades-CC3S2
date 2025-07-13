@@ -10,6 +10,7 @@
 * [Practica Dirigida 1](https://github.com/JunalChowdhuryG/Practica-Dirigida-1/blob/main/README.md)
 * [Practica Dirigida 2](https://github.com/JunalChowdhuryG/Practica-Dirigida-2/blob/main/README.md)
 * [Practica Dirigida 3](https://github.com/JunalChowdhuryG/Practica-Dirigida-3/blob/main/README.md)
+* [Practica Dirigida 7](https://github.com/JunalChowdhuryG/Practica-Dirigida-7/blob/main/README.md)
 ## Actividades del curso CC3S2
 Todas las actividades estan hechas en el `README.md` de cada carpeta que le corresponde.
 * [Actividad 1: Introduccion a DevOps](/Actividad-01/README.md)
