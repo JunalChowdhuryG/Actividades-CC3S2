@@ -36,6 +36,7 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
     - Visualizar Tablero Kanban: [Tablero Kanban Grupo 2](https://github.com/users/JunalChowdhuryG/projects/4)
 * [Actividad 18: Gestión ágil de sprints con GitHub, planificación, ejecución y cierre de Sprints](/Actividad-17-18/README.md)
     - Visualizar Tablero Kanban: [Tablero Kanban Grupo 2](https://github.com/users/JunalChowdhuryG/projects/4)
+* [Actividad 21: Patrones para módulos de infraestructura](/Actividad-21/README.md)
 * [Actividad 24: Introduccion a Docker, ETL en Docker Compose](/Actividad-24/README.md)
     - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-24](https://github.com/JunalChowdhuryG/Actividad-24)
 * [Actividad 25: Arquitectura y desarrollo de microservicios con Docker y Kubernetes](Actividad-25/README.md)
