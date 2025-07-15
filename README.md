@@ -40,6 +40,8 @@ Todas las actividades estan hechas en el `README.md` de cada carpeta que le corr
 * [Actividad 24: Introduccion a Docker, ETL en Docker Compose](/Actividad-24/README.md)
     - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-24](https://github.com/JunalChowdhuryG/Actividad-24)
 * [Actividad 25: Arquitectura y desarrollo de microservicios con Docker y Kubernetes](Actividad-25/README.md)
-* [Actividad 27: Migrando a Microservicios: Docker, Kubernetes y CI/CD](/Actividad-27/README.md)
+* [(En progreso) Actividad 26:  Implementación continua con GitHub Actions](https://github.com/JunalChowdhuryG/Actividad-26)
+    - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-26](https://github.com/JunalChowdhuryG/Actividad-26)
+* [(En progreso) Actividad 27: Migrando a Microservicios: Docker, Kubernetes y CI/CD](/Actividad-27/README.md)
     - Repositorio del proyecto: [github.com/JunalChowdhuryG/Actividad-27](https://github.com/JunalChowdhuryG/Actividad-27)
     
